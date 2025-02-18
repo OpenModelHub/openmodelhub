@@ -5,13 +5,13 @@
   <h3>Free/Open Source Desktop Application for managing and interacting with models</h3>
 </div>
 
-# What OMH solves
+## What OMH solves
 
 OpenModelHub (OMH) is a lightweight and open-source desktop application to manage, download, and chat with models, either locally or in the cloud.
 
 OMH utilizes ollama as its main model searching API. Users can add their own model API using an API link and key. OMH solves the problem of non-tech-savvy users not having a easy-to-use UI to manage and interact with their downloaded models locally.
 
-# Running Development
+## Running Development
 
 > [!NOTE]
 > [pnpm](https://pnpm.io/), [Rust](https://www.rust-lang.org/), and [TypeScript](https://www.typescriptlang.org/) are required, please install them first before running the following commands.  
@@ -23,17 +23,18 @@ $ pnpm i .
 
 Since OpenModelHub is built in Tauri, it can be run on the Web or as a Desktop Application.
 
-Running as Desktop Application (highly recommended as development).
+#### Running as Desktop Application (highly recommended as development).
+This will use Rust as its runtime, so please make sure to install it first.
 ```bash
 $ pnpm run tauri dev
 ```
 
-Running on the Web.
+#### Running on the Web.
 ```bash
 $ pnpm run dev
 ```
 
-Then, you will see something like the following,
+If successfully run, you will see something like the following,
 ```
   VITE v6.1.0  ready in 360 ms
 
@@ -42,7 +43,7 @@ Then, you will see something like the following,
 ```
 
 
-# Contributions
+## Contributions
 
 This project uses [Tauri](https://tauri.app/) and [pnpm](https://pnpm.io/).
 
@@ -51,3 +52,6 @@ The frontend uses [React](https://react.dev/) and [tailwindcss](https://tailwind
 Languages using [TypeScript](https://www.typescriptlang.org/) and [Rust](https://www.rust-lang.org/).
 
 This project is currently working in progress. Feel free to contribute by consulting the [Roadmap](https://github.com/orgs/OpenModelHub/projects/1/views/4).
+
+## License
+MIT
