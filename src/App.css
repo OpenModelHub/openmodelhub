@@ -1,5 +1,0 @@
-@import "tailwindcss";
-
-.main-container {
-  @apply p-10 bg-[#172126] h-screen w-screen text-white select-none
-}
