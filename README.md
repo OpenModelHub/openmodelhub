@@ -11,11 +11,11 @@
 [![contributors](https://img.shields.io/github/contributors/OpenModelHub/openmodelhub)](https://github.com/OpenModelHub/openmodelhub/contributors)
 [![license](https://img.shields.io/github/license/OpenModelHub/openmodelhub.svg)](https://github.com/OpenModelHub/openmodelhub/blob/master/LICENSE)
 
-
 </div>
 
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Installing](#installing)
 - [Running and Build](#running-and-build)
@@ -36,12 +36,15 @@ OMH solves the problem of non-tech-savvy users not having a easy-to-use UI to ma
 OMH is currently in its early stages of development, feel free to [contribute](#contributions).
 
 ## Installing
+
 This project is not ready for a release yet. Come back soon!
 
 ## Running and Build
+
 Below are the steps to run in development and how to make your own release. 
 
 #### Prerequisites
+
 Before you can run the application by following the steps, please make sure you have all these tools installed in your system.
 - [pnpm](https://pnpm.io/)
 - [Rust](https://www.rust-lang.org/)
@@ -55,6 +58,7 @@ $ pnpm i .
 Since OpenModelHub is built on top of Tauri, it can be run as a Web or a Desktop Application. The latter is highly recommended because OMH is designed to be an app anyways.  
 
 #### Development
+
 Highly Recommended, run the following command to start the app.
 ```sh
 $ pnpm run tauri dev
@@ -76,6 +80,7 @@ Then, a window will pop up which you can preview the app in real-time.
 You can also view it on the web (not recommended).
 
 #### Building
+
 Run the following command to build and make a release of OMH.
 ```sh
 $ pnpm run tauri build
