@@ -13,7 +13,8 @@ OMH utilizes ollama as its main model searching API. Users can add their own mod
 
 ## Running Development
 
-> [!NOTE] > [pnpm](https://pnpm.io/), [Rust](https://www.rust-lang.org/), and [TypeScript](https://www.typescriptlang.org/) are required, please install them first before running the following commands.
+> [!NOTE]
+> [pnpm](https://pnpm.io/), [Rust](https://www.rust-lang.org/), and [TypeScript](https://www.typescriptlang.org/) are required, please install them first before running the following commands.
 
 First, install the libraries with the following command.
 
