@@ -22,7 +22,7 @@ export default function Home() {
         </div>
 
         <div className='flex space-x-2'>
-          <Button element='link' variant='outlined' href='/preview'>
+          <Button element='link' variant='outlined' href='./preview'>
             See Preview
           </Button>
         </div>
