@@ -23,6 +23,7 @@
   - [Development](#development)
   - [Building](#building)
 - [Contributions](#contributions)
+- [Design Philosophy](#design-philosophy)
 - [License](#license)
 
 ## Introduction
@@ -107,6 +108,12 @@ The frontend uses [React](https://react.dev/) and [tailwindcss](https://tailwind
 Languages using [TypeScript](https://www.typescriptlang.org/) and [Rust](https://www.rust-lang.org/).
 
 This project is currently working in progress. Feel free to contribute by consulting the [Roadmap](https://github.com/orgs/OpenModelHub/projects/1/views/4).
+
+## Design Philosophy
+
+OpenModelHub as a User Interface-oriented app should be designed to feel lightweight, neutral, and welcoming/warm.
+
+It also should feel professional, reliable, and intuitive to use, ensuring that users can easily navigate and manage their models without any technical difficulties. The design should prioritize user experience, making complex tasks simple and accessible for all users.
 
 ## License
 
