@@ -15,7 +15,10 @@ const Link: React.FC<LinkProps> = ({
   className,
   external = false,
 }) => {
-  className = `${baseClasses} ${className}`
+  // make underline be overwritten when a
+  // custom className is added.
+  if (!className) className = baseClasses
+
   if (external)
     return (
       <button onClick={() => openUrl(href)} className={className}>
