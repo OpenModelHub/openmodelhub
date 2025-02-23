@@ -19,7 +19,7 @@ const variantClasses = {
   ],
   outlined: [
     'border hover:bg-primary-900/5 active:bg-primary-900/10',
-    'border hover:bg-primary-100/5 active:bg-primary-100/10',
+    'border hover:bg-primary-100/10 active:bg-primary-100/15',
   ],
   text: [
     'text-black hover:bg-primary-900/10 active:bg-primary-900/15',
