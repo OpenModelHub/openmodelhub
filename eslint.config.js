@@ -18,6 +18,7 @@ export default [
       semi: ['warn', 'never'],
       'jsx-quotes': ['warn', 'prefer-single'],
       quotes: ['warn', 'single'],
+      'react/prop-types': 'off',
     },
   },
 ]
