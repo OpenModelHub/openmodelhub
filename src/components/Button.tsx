@@ -7,6 +7,7 @@ interface ButtonProps {
   color?: 'light' | 'dark'
   element?: 'button' | 'link'
   href?: string
+  className?: string
 }
 
 const baseClasses = 'px-4 py-1 rounded-md cursor-pointer underline-none'
@@ -34,10 +35,11 @@ const Button: React.FC<ButtonProps> = ({
   color = 'light',
   element: type = 'button',
   href = '#',
+  className = '',
 }) => {
-  const className = `${baseClasses} ${
+  className = `${baseClasses} ${
     variantClasses[variant][color == 'light' ? 0 : 1]
-  }`
+  } ${className}`
 
   if (type === 'link') {
     return (
