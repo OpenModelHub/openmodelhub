@@ -16,6 +16,7 @@
 
 ## Table of Contents
 
+- [Current Snapshot](#current-snapshot)
 - [Introduction](#introduction)
 - [Installing](#installing)
 - [Running and Build](#running-and-build)
@@ -25,6 +26,9 @@
 - [Contributions](#contributions)
 - [Design Philosophy](#design-philosophy)
 - [License](#license)
+
+## Current Snapshot
+![OMH Snapshot 26 February 2025](https://github.com/user-attachments/assets/31301034-7f84-4ccf-8d1a-81230fbc5727)
 
 ## Introduction
 
