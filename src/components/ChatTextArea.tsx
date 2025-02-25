@@ -4,14 +4,14 @@ import Button from './Button'
 
 const ChatArea = () => {
   return (
-    <div className='relative'>
+    <div>
       <TextareaAutosize
         maxRows={4}
         className='w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
         placeholder='Type a Message...'
       />
 
-      <Button variant='contained' className='absolute top-3 right-5'>
+      <Button variant='contained' className='absolute top-5 right-3'>
         <ArrowTurnDownRightIcon className='w-6' />
       </Button>
 
