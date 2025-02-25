@@ -11,6 +11,7 @@ interface TypographyProps {
     | 'body1'
     | 'body2'
     | 'caption'
+  element?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'b'
   children: React.ReactNode
   className?: string
 }
@@ -28,11 +29,12 @@ const variantClasses = {
 }
 
 const Typography: React.FC<TypographyProps> = ({
-  variant,
+  variant = 'body1',
+  element = 'p',
   children,
   className,
 }) => {
-  const Component = variant as keyof JSX.IntrinsicElements
+  const Component = element as keyof JSX.IntrinsicElements
   return (
     <Component className={`${variantClasses[variant]} ${className}`}>
       {children}

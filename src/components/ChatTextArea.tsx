@@ -1,6 +1,7 @@
 import TextareaAutosize from 'react-textarea-autosize'
 import { ArrowTurnDownRightIcon } from '@heroicons/react/24/solid'
 import Button from './Button'
+import Typography from './Typography'
 
 const ChatArea = () => {
   return (
@@ -15,9 +16,9 @@ const ChatArea = () => {
         <ArrowTurnDownRightIcon className='w-6' />
       </Button>
 
-      <p className='text-xs'>
+      <Typography variant='caption'>
         Press <b>Ctrl+Enter</b> to send
-      </p>
+      </Typography>
     </div>
   )
 }
