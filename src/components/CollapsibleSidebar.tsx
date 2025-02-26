@@ -18,8 +18,8 @@ const CollapsibleSidebar: React.FC<SidebarProps> = ({ sidebarState }) => {
     <div className='sticky left-0'>
       {!isOpen && (
         <Button
-          variant='text'
-          className='absolute top-5 left-5 z-50 w-10 h-10 px-0 py-0 grid items-center justify-center'
+          variant='icon'
+          className='absolute top-5 left-5 z-50 w-10 h-10'
           onClick={toggleSidebar}
         >
           <ViewColumnsIcon className='w-7 h-7 text-primary-900' />
@@ -32,8 +32,8 @@ const CollapsibleSidebar: React.FC<SidebarProps> = ({ sidebarState }) => {
       >
         <div className={`${isOpen ? 'visible' : 'hidden'}`}>
           <Button
-            variant='text'
-            className='absolute top-5 right-5 z-50 w-10 h-10 px-0 py-0 grid items-center justify-center'
+            variant='icon'
+            className='absolute top-5 left-5 z-50 w-10 h-10'
             onClick={toggleSidebar}
           >
             <XMarkIcon className='w-7 h-7 text-primary-900' />

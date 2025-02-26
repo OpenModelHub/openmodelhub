@@ -3,7 +3,7 @@ import Link from './Link'
 interface ButtonProps {
   children: React.ReactNode
   onClick?: () => void
-  variant?: 'text' | 'contained' | 'outlined'
+  variant?: 'text' | 'contained' | 'outlined' | 'icon'
   color?: 'light' | 'dark'
   element?: 'button' | 'link'
   href?: string
@@ -25,6 +25,10 @@ const variantClasses = {
   text: [
     'text-black hover:bg-primary-900/10 active:bg-primary-900/15',
     'text-white hover:bg-primary-100/10 active:bg-primary-100/15',
+  ],
+  icon: [
+    'text-black hover:bg-primary-900/10 active:bg-primary-900/15 px-0 py-0 grid items-center justify-center',
+    'text-white hover:bg-primary-100/10 active:bg-primary-100/15 px-0 py-0 grid items-center justify-center',
   ],
 }
 

@@ -27,7 +27,7 @@ const MainView: React.FC<MainViewProps> = ({ isSidebarOpen }) => {
         {/* heading, titles etc */}
         <div className='sticky top-0 pt-3 py-2 bg-primary-100'>
           <Typography variant='h4'>deepseek-r1:671b (Local, 404GB)</Typography>
-          <Status isRunning={true} />
+          <Status status='running' />
         </div>
         {/* texts */}
         <div className='flex-grow flex flex-col overflow-y-auto py-10 max-h-screen'>
