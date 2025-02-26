@@ -16,8 +16,15 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
 
   const updateMessages = (responseToAppend: string) => {
     setMessages((prev) => {
-      prev[prev.length - 1].message += responseToAppend
-      return prev
+      const nwAppend = prev[prev.length - 1].message + responseToAppend
+
+      return [
+        ...prev.slice(0, prev.length - 1),
+        {
+          message: nwAppend,
+          sender: 'bot',
+        },
+      ]
     })
   }
 
