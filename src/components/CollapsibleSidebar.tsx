@@ -33,7 +33,7 @@ const CollapsibleSidebar: React.FC<SidebarProps> = ({ sidebarState }) => {
         <div className={`${isOpen ? 'visible' : 'hidden'}`}>
           <Button
             variant='icon'
-            className='absolute top-5 left-5 z-50 w-10 h-10'
+            className='absolute top-5 right-5 z-50 w-10 h-10'
             onClick={toggleSidebar}
           >
             <XMarkIcon className='w-7 h-7 text-primary-900' />
