@@ -2,7 +2,7 @@ import { streamFetch } from './http'
 
 const OLLAMA_BASE_URL = 'http://localhost:11434/api' // TODO: change this to config when config feature is available
 
-export async function* StreamGenerateRequest(
+export async function* streamGenerateResponse(
   model: string,
   inputPrompt: string
 ): AsyncGenerator<GenerateCompletionResponse> {
@@ -21,4 +21,10 @@ export async function* StreamGenerateRequest(
   )) {
     yield JSON.parse(chunk)
   }
+}
+
+export async function fetchModels(): Promise<ListModelsResponse> {
+  return fetch(`${OLLAMA_BASE_URL}/api/tags`, {
+    method: 'GET',
+  }).then((res) => res.json())
 }

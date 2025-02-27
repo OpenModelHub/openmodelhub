@@ -1,10 +1,10 @@
 import TextareaAutosize from 'react-textarea-autosize'
 import { ArrowTurnDownRightIcon } from '@heroicons/react/24/solid'
-import Button from './Button'
-import Typography from './Typography'
+import Button from '../Button'
+import Typography from '../Typography'
 import React, { Dispatch, SetStateAction } from 'react'
 import { ChatDisplayMessage } from './ChatDisplayArea'
-import { StreamGenerateRequest } from '../lib/ollamaChat'
+import { streamGenerateResponse } from '../../lib/ollamaChat'
 
 interface ChatAreaProps {
   currentModel: string
@@ -15,48 +15,54 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
 
-  const updateMessages = (responseToAppend: string) => {
+  const updateMessages = (res: GenerateCompletionResponse) => {
     setMessages((prev) => {
-      const nwAppend = prev[prev.length - 1].message + responseToAppend
+      const nwAppend = prev[prev.length - 1].message + res.response
 
       return [
         ...prev.slice(0, prev.length - 1),
         {
           message: nwAppend,
           sender: 'bot',
+          loading: !res.done,
         },
       ]
     })
   }
 
   const submitPrompt = async () => {
+    if (!promptText) return
     setLoading(true)
     setMessages((prev) => [
       ...prev,
       {
         message: promptText,
         sender: 'user',
+        loading: false,
       },
       {
         message: '',
         sender: 'bot',
+        loading: true,
       },
     ])
 
-    for await (const chunkText of StreamGenerateRequest(
+    for await (const chunkText of streamGenerateResponse(
       currentModel,
       promptText
     )) {
-      updateMessages(chunkText.response)
+      updateMessages(chunkText)
     }
 
     setPrompt('')
     setLoading(false)
+    // updateMessages('') // update one more time to set loading to false
   }
 
   return (
     <div className='disabled:opacity-50 disabled:cursor-not-allowed'>
       <TextareaAutosize
+        minRows={2}
         maxRows={4}
         value={promptText}
         disabled={loading}

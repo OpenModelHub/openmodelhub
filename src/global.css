@@ -32,7 +32,7 @@
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-black;
+    @apply bg-black/80;
   }
 }
 

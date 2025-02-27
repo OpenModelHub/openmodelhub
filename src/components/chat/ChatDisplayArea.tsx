@@ -4,6 +4,7 @@ import ChatBubble from './ChatBubble'
 export interface ChatDisplayMessage {
   message: string
   sender: 'user' | 'bot'
+  loading: boolean
 }
 
 interface ChatDisplayProps {
@@ -13,9 +14,17 @@ interface ChatDisplayProps {
 const ChatDisplayArea: React.FC<ChatDisplayProps> = ({ messages }) => {
   return (
     <>
-      {messages.map((msg, index) => (
-        <ChatBubble key={index} message={msg.message} sender={msg.sender} />
-      ))}
+      {messages.map((msg, index) => {
+        if (msg.message != '')
+          return (
+            <ChatBubble
+              key={index}
+              loading={msg.loading}
+              message={msg.message}
+              sender={msg.sender}
+            />
+          )
+      })}
     </>
   )
 }

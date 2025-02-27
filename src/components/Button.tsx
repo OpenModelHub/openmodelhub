@@ -11,7 +11,7 @@ interface ButtonProps {
   disabled?: boolean
 }
 
-const baseClasses = 'px-4 py-1 rounded-md cursor-pointer underline-none'
+const baseClasses = 'block px-4 py-1 rounded-md cursor-pointer underline-none'
 const variantClasses = {
   // [light, dark]
   // light buttons have a dark foreground
