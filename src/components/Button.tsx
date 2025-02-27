@@ -8,6 +8,7 @@ interface ButtonProps {
   element?: 'button' | 'link'
   href?: string
   className?: string
+  disabled?: boolean
 }
 
 const baseClasses = 'px-4 py-1 rounded-md cursor-pointer underline-none'
@@ -40,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
   element: type = 'button',
   href = '#',
   className = '',
+  disabled = false,
 }) => {
   className = `${baseClasses} ${
     variantClasses[variant][color == 'light' ? 0 : 1]
@@ -54,7 +56,7 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button onClick={onClick} className={className}>
+    <button disabled={disabled} onClick={onClick} className={className}>
       {children}
     </button>
   )

@@ -13,6 +13,7 @@ interface ChatAreaProps {
 
 const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
   const [promptText, setPrompt] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
 
   const updateMessages = (responseToAppend: string) => {
     setMessages((prev) => {
@@ -29,6 +30,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
   }
 
   const submitPrompt = async () => {
+    setLoading(true)
     setMessages((prev) => [
       ...prev,
       {
@@ -47,23 +49,27 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
     )) {
       updateMessages(chunkText.response)
     }
-    // updateMessages('hello world')
+
+    setPrompt('')
+    setLoading(false)
   }
 
   return (
-    <div>
+    <div className='disabled:opacity-50 disabled:cursor-not-allowed'>
       <TextareaAutosize
         maxRows={4}
         value={promptText}
+        disabled={loading}
         onChange={(e) => setPrompt(e.target.value)}
-        className='w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
+        className='disabled:opacity-50 disabled:cursor-not-allowed w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
         placeholder='Type a Message...'
       />
 
       <Button
         variant='contained'
         onClick={submitPrompt}
-        className='absolute top-5 right-3'
+        disabled={loading}
+        className='disabled:opacity-50 disabled:cursor-not-allowed absolute top-5 right-3'
       >
         <ArrowTurnDownRightIcon className='w-6' />
       </Button>

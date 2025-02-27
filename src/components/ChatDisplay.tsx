@@ -1,13 +1,13 @@
-import React from 'react';
-import ChatBubble from './ChatBubble';
+import React from 'react'
+import ChatBubble from './ChatBubble'
 
 interface ChatMessage {
-  message: string;
-  sender: 'user' | 'bot';
+  message: string
+  sender: 'user' | 'bot'
 }
 
 interface ChatDisplayProps {
-  messages: ChatMessage[];
+  messages: ChatMessage[]
 }
 
 const ChatDisplay: React.FC<ChatDisplayProps> = ({ messages }) => {
@@ -17,7 +17,7 @@ const ChatDisplay: React.FC<ChatDisplayProps> = ({ messages }) => {
         <ChatBubble key={index} message={msg.message} sender={msg.sender} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default ChatDisplay;
+export default ChatDisplay
