@@ -2,7 +2,7 @@
   <br />
   <img src="./public/omhlogo.svg" alt="OMH Logo" width="200"/>
   <h1>Open Model-Hub</h1>
-  <h3>Free and Open Source Desktop Application for managing models</h3>
+  <h3>Lightweight and Open Source Desktop Application for managing models</h3>
 </div>
 
 <div id="badges" align="center">
@@ -18,6 +18,7 @@
 
 - [Current Snapshot](#current-snapshot)
 - [Introduction](#introduction)
+- [Performance](#performance)
 - [Installing](#installing)
 - [Running and Build](#running-and-build)
   - [Prerequisites](#prerequisites)
@@ -39,6 +40,16 @@ OMH utilizes [ollama](https://ollama.com) as its main model searching API. Users
 OMH solves the problem of non-tech-savvy users not having a easy-to-use UI to manage and interact with their downloaded models locally.
 
 OMH is currently in its early stages of development, feel free to [contribute](#contributions).
+
+## Performance
+Up until this [commit](https://github.com/OpenModelHub/openmodelhub/commit/a52acec81a42c04046926025fa3f23be07d9d04b) (1 March 2025), the benchmark of Open Model Hub is the following,
+
+| Category           | Size    |
+|--------------------|---------|
+| App Bundle Size    | 14.3MB  |
+| App RAM Usage      | 4.7MB   |
+| WebView2 RAM Usage | 130.0MB |
+| Total RAM Usage    | 134.7MB |
 
 ## Installing
 
