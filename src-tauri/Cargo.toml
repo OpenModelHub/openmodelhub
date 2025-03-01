@@ -2,7 +2,7 @@
 name = "openmodelhub"
 version = "0.1.0"
 description = "A Tauri App"
-authors = ["Adriel Jansen Siahaya"]
+authors = ["Adriel Jansen Siahaya", "The Open Model-Hub contributors"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
