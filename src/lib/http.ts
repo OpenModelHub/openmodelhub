@@ -1,10 +1,20 @@
-export async function* streamFetch(fetchCall: () => Promise<Response>) {
-  const response = await fetchCall()
-  if (response.body == null) return []
-  const reader = response.body.getReader()
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    yield new TextDecoder().decode(value)
-  }
+import { Channel, invoke } from '@tauri-apps/api/core'
+
+export type StreamEvent = {
+  chunkResponse: string
+}
+
+export async function streamPostFetch(
+  uri: string,
+  body: string,
+  onData: (message: StreamEvent) => void
+) {
+  const onEvent = new Channel<StreamEvent>()
+  onEvent.onmessage = onData
+
+  return invoke('fetch_post_stream', {
+    uri,
+    body,
+    onEvent,
+  })
 }

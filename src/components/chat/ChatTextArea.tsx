@@ -47,13 +47,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
       },
     ])
 
-    for await (const chunkText of streamGenerateResponse(
-      currentModel,
-      promptText
-    )) {
-      updateMessages(chunkText)
-    }
-
+    await streamGenerateResponse(currentModel, promptText, (message) => {
+      const body: GenerateCompletionResponse = JSON.parse(message.chunkResponse)
+      updateMessages(body)
+    })
     setPrompt('')
     setLoading(false)
     // updateMessages('') // update one more time to set loading to false

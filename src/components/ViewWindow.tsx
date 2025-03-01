@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { ChatDisplayMessage } from './chat/ChatDisplayArea'
 import { PageState } from '../pages/preview'
 import ChatView from './views/ChatView'
@@ -14,14 +14,12 @@ interface MainViewProps {
 const MainView: React.FC<MainViewProps> = ({ isSidebarOpen, pageState }) => {
   const messagesState = React.useState<ChatDisplayMessage[]>([])
 
-  const page: Record<PageState, React.FC> = {
-    'tab:manageModels': ManageModelsView,
-    'tab:pullModels': PullModelsView,
-    'tab:settings': SettingsView,
-    'chat:llama3.2:latest': ChatView,
+  const page: Record<PageState, React.ReactNode> = {
+    'tab:manageModels': <ManageModelsView />,
+    'tab:pullModels': <PullModelsView />,
+    'tab:settings': <SettingsView />,
+    'chat:llama3.2:latest': <ChatView messagesState={messagesState} />,
   }
-
-  const Element = page[pageState[0]]
 
   return (
     <div
@@ -30,7 +28,7 @@ const MainView: React.FC<MainViewProps> = ({ isSidebarOpen, pageState }) => {
       }`}
     >
       <div className='lg:px-12 sm:px-10 pl-15 px-2 w-full h-full flex flex-col'>
-        <Element messagesState={messagesState} />
+        {page[pageState[0]]}
       </div>
     </div>
   )
