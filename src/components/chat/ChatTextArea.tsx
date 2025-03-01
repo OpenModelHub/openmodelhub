@@ -14,6 +14,7 @@ interface ChatAreaProps {
 const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
   const updateMessages = (res: GenerateCompletionResponse) => {
     setMessages((prev) => {
@@ -47,18 +48,34 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel, setMessages }) => {
       },
     ])
 
-    await streamGenerateResponse(currentModel, promptText, (message) => {
+    streamGenerateResponse(currentModel, promptText, (message) => {
       const body: GenerateCompletionResponse = JSON.parse(message.chunkResponse)
       updateMessages(body)
+    }).finally(() => {
+      setPrompt('')
+      setLoading(false)
+      // need to wait for the undisabled textarea to be rendered first, so we need a timeout.
+      setTimeout(() => {
+        textareaRef.current?.focus()
+      }, 10)
     })
-    setPrompt('')
-    setLoading(false)
-    // updateMessages('') // update one more time to set loading to false
   }
+
+  const keystrokeSend = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' && e.ctrlKey && !loading && promptText != '')
+      submitPrompt()
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', keystrokeSend)
+    return () => document.removeEventListener('keydown', keystrokeSend)
+  })
 
   return (
     <div className='disabled:opacity-50 disabled:cursor-not-allowed'>
       <TextareaAutosize
+        autoFocus
+        ref={textareaRef}
         minRows={2}
         maxRows={4}
         value={promptText}
