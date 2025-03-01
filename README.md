@@ -48,8 +48,8 @@ Up until this [commit](https://github.com/OpenModelHub/openmodelhub/commit/a52ac
 |--------------------|---------|
 | App Bundle Size    | 14.3MB  |
 | App RAM Usage      | 4.7MB   |
-| WebView2 RAM Usage | 130.0MB |
-| Total RAM Usage    | 134.7MB |
+| WebView2 RAM Usage | 100.0MB |
+| Total RAM Usage    | 104.7MB |
 
 ## Installing
 
