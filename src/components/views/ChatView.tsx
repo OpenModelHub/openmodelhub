@@ -56,7 +56,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messagesState }) => {
       {/* texts */}
       <div
         ref={chatRef}
-        className='flex-grow flex flex-col overflow-y-auto py-10 max-h-screen'
+        className='flex-grow flex flex-col overflow-y-auto max-h-screen'
       >
         <ChatDisplayArea messages={messagesState[0]} />
       </div>
