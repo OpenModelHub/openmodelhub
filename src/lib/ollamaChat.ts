@@ -1,13 +1,9 @@
-import { StreamEvent, streamPostFetch } from './http'
+import { streamPostFetch } from './http'
 import { fetch } from '@tauri-apps/plugin-http'
 
 const OLLAMA_BASE_URL = 'http://localhost:11434/api' // TODO: change this to config when config feature is available
 
-export async function streamGenerateResponse(
-  model: string,
-  inputPrompt: string,
-  onData: (message: StreamEvent) => void
-) {
+export function streamGenerateResponse(model: string, inputPrompt: string) {
   const requestBody: GenerateCompletionRequest = {
     model: model,
     prompt: inputPrompt,
@@ -15,13 +11,12 @@ export async function streamGenerateResponse(
 
   return streamPostFetch(
     `${OLLAMA_BASE_URL}/generate`,
-    JSON.stringify(requestBody),
-    onData
+    JSON.stringify(requestBody)
   )
 }
 
 export async function fetchModels(): Promise<ListModelsResponse> {
-  return fetch(`${OLLAMA_BASE_URL}/api/tags`, {
+  return fetch(`${OLLAMA_BASE_URL}/tags`, {
     method: 'GET',
   }).then((res) => res.json())
 }

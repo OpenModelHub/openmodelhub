@@ -1,25 +1,80 @@
-import { useState } from 'react'
+import React from 'react'
 import CollapsibleSidebar from '../../components/CollapsibleSidebar'
-import MainView from '../../components/ViewWindow'
+import MainView from '../../components/MainView'
+import { ChatDisplayMessage } from '../../components/chat/ChatDisplayArea'
+import { fetchModels } from '../../lib/ollamaChat'
 
-export type PageState =
+export type ValidPage =
   | 'tab:manageModels'
   | 'tab:pullModels'
   | 'tab:settings'
   | 'chat:llama3.2:latest'
   | `chat:${string}`
 
+interface GlobalContextState {
+  page: ValidPage
+  setPage: React.Dispatch<React.SetStateAction<ValidPage>>
+
+  sidebarOpen: boolean
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+
+  messages: Record<string, ChatDisplayMessage[]>
+  setMessages: React.Dispatch<
+    React.SetStateAction<Record<string, ChatDisplayMessage[]>>
+  >
+
+  models: Record<string, Model>
+  setModels: React.Dispatch<React.SetStateAction<Record<string, Model>>>
+}
+
+export const GlobalContext = React.createContext<GlobalContextState>(
+  {} as GlobalContextState
+)
+
 export default function Preview() {
-  const sidebarState = useState(false)
-  const pageState = useState<PageState>('chat:llama3.2:latest')
+  const [sidebarOpen, setSidebarOpen] = React.useState(false)
+  const [page, setPage] = React.useState<ValidPage>('tab:manageModels')
+  const [messages, setMessages] = React.useState<
+    Record<string, ChatDisplayMessage[]>
+  >({}) // maybe this could be better than loading all messages to RAM
+  const [models, setModels] = React.useState<Record<string, Model>>({})
+
+  React.useEffect(() => {
+    // TODO: add loading screen
+    // fetch models
+    ;(async () => {
+      const models = await fetchModels()
+
+      const initModelMessages: Record<string, ChatDisplayMessage[]> = {}
+      const initModelInfo: Record<string, Model> = {}
+      models.models.forEach((model) => {
+        initModelMessages[model.name] = []
+        initModelInfo[model.name] = model
+      })
+
+      setMessages(initModelMessages)
+      setModels(initModelInfo)
+    })()
+  }, [])
 
   return (
-    <>
+    <GlobalContext.Provider
+      value={{
+        page,
+        setPage,
+        sidebarOpen,
+        setSidebarOpen,
+        messages,
+        setMessages,
+        models,
+        setModels,
+      }}
+    >
       {/* <PreviewFloating /> */}
       <div className='flex bg-primary-100'>
-        <CollapsibleSidebar pageState={pageState} sidebarState={sidebarState} />
-        <MainView pageState={pageState} isSidebarOpen={sidebarState[0]} />
+        <CollapsibleSidebar />
+        <MainView />
       </div>
-    </>
+    </GlobalContext.Provider>
   )
 }

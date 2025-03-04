@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import Typography from './Typography'
-import { PageState } from '../pages/preview'
+import { GlobalContext, ValidPage } from '../pages/preview'
 
 interface SidebarButtonProps {
   icon: React.ForwardRefExoticComponent<
@@ -11,21 +11,20 @@ interface SidebarButtonProps {
     } & React.RefAttributes<SVGSVGElement>
   >
   label: string
-  targetPage: PageState
-  setPageState: React.Dispatch<React.SetStateAction<PageState>>
+  targetPage: ValidPage
 }
 
 const SidebarButton: React.FC<SidebarButtonProps> = ({
   icon,
   label,
   targetPage,
-  setPageState,
 }) => {
+  const { setPage } = React.useContext(GlobalContext)
   const Icon = icon
   return (
     <Button
       variant='text'
-      onClick={() => setPageState(targetPage)}
+      onClick={() => setPage(targetPage)}
       className='flex items-center space-x-2 w-full'
     >
       <Icon className='w-5 text-primary-900' />

@@ -1,20 +1,43 @@
-import { Channel, invoke } from '@tauri-apps/api/core'
-
-export type StreamEvent = {
-  chunkResponse: string
-}
+import { Channel, invoke, isTauri } from '@tauri-apps/api/core'
 
 export async function streamPostFetch(
   uri: string,
-  body: string,
-  onData: (message: StreamEvent) => void
-) {
-  const onEvent = new Channel<StreamEvent>()
-  onEvent.onmessage = onData
+  body: string
+): Promise<ReadableStream<Uint8Array>> {
+  if (!isTauri()) {
+    const x = await fetch(uri, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Transfer-Encoding': 'chunked',
+      },
+      body,
+    })
+    // @ts-expect-error ts cannot
+    return x.body
+  }
 
-  return invoke('fetch_post_stream', {
+  const onEvent = new Channel<ArrayBuffer | number[]>()
+
+  const readableStream = new ReadableStream({
+    start: (controller) => {
+      onEvent.onmessage = (res: ArrayBuffer | number[]) => {
+        if (
+          res instanceof ArrayBuffer ? res.byteLength == 0 : res.length == 0
+        ) {
+          controller.close()
+          return
+        }
+        controller.enqueue(new Uint8Array(res))
+      }
+    },
+  })
+
+  invoke('fetch_post_stream', {
     uri,
     body,
     onEvent,
   })
+
+  return readableStream
 }

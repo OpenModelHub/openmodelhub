@@ -2,11 +2,12 @@ import React from 'react'
 import Typography from './Typography'
 
 interface StatusProps {
-  status: 'running' | 'connected' | 'offline'
+  status: 'available' | 'running' | 'connected' | 'offline'
 }
 
 const Status: React.FC<StatusProps> = ({ status }) => {
   const baseClasses = {
+    available: 'bg-green-500',
     running: 'bg-green-500',
     connected: 'bg-blue-500',
     offline: 'bg-gray-500',
