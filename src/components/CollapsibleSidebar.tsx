@@ -18,7 +18,8 @@ const SidebarButtonGroup = () => {
     <div className='relative px-2'>
       <SidebarButton
         icon={SparklesIcon}
-        targetPage='chat:llama3.2:latest'
+        targetPage='https://github.com/OpenModelHub/openmodelhub'
+        external
         label='Contribute'
       />
 
@@ -103,14 +104,14 @@ const CollapsibleSidebar: React.FC = () => {
           {/* Sidebar Content */}
 
           {/* Main Tabs */}
-          <div className='overflow-hidden text-nowrap space-y-4 h-full flex flex-col'>
-            <div className='items-center space-x-5 pl-5'>
+          <div className='overflow-hidden text-nowrap h-full flex flex-col'>
+            <div className='items-center space-x-5 pl-5 mb-5'>
               <img src='/omhlogo-dark.svg' className='w-10' />
             </div>
-            <div className='grow'>
+            <div className='grow overflow-auto'>
               <ModelsGroup models={models} />
             </div>
-            <div className='py-5'>
+            <div className='pb-5'>
               <SidebarButtonGroup />
             </div>
           </div>

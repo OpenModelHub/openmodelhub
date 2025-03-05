@@ -14,6 +14,7 @@ const Link: React.FC<LinkProps> = ({
   children,
   className,
   external = false,
+  ...props
 }) => {
   // make underline be overwritten when a
   // custom className is added.
@@ -21,13 +22,13 @@ const Link: React.FC<LinkProps> = ({
 
   if (external)
     return (
-      <button onClick={() => openUrl(href)} className={className}>
+      <button onClick={() => openUrl(href)} className={className} {...props}>
         {children}
       </button>
     )
 
   return (
-    <a href={href} className={className}>
+    <a href={href} className={className} {...props}>
       {children}
     </a>
   )

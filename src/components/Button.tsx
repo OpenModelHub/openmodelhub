@@ -9,6 +9,7 @@ interface ButtonProps {
   href?: string
   className?: string
   disabled?: boolean
+  external?: boolean
 }
 
 const baseClasses = 'block px-4 py-1 rounded-md cursor-pointer underline-none'
@@ -42,6 +43,8 @@ const Button: React.FC<ButtonProps> = ({
   href = '#',
   className = '',
   disabled = false,
+  external = false,
+  ...props
 }) => {
   className = `${baseClasses} ${
     variantClasses[variant][color == 'light' ? 0 : 1]
@@ -49,14 +52,19 @@ const Button: React.FC<ButtonProps> = ({
 
   if (type === 'link') {
     return (
-      <Link className={className} href={href} external={false}>
+      <Link className={className} href={href} external={external} {...props}>
         {children}
       </Link>
     )
   }
 
   return (
-    <button disabled={disabled} onClick={onClick} className={className}>
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={className}
+      {...props}
+    >
       {children}
     </button>
   )

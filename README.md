@@ -29,7 +29,7 @@
 - [License](#license)
 
 ## Current Snapshot
-<video src='https://github.com/user-attachments/assets/5461b01e-c095-4a81-8892-ad9569c5a041'></video>
+<video src='https://github.com/user-attachments/assets/12b9ffb5-23a7-4102-b4e9-9e1486f3ae05'></video>
 
 ## Introduction
 
