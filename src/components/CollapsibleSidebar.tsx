@@ -51,16 +51,22 @@ const SidebarButtonGroup = () => {
 }
 
 const ModelsGroup = ({ models }: { models: Record<string, Model> }) => {
+  const [filterValue, setFilter] = React.useState('')
   return (
-    <div className='relative px-2 grow'>
+    <div className='relative px-2'>
       <input
         type='text'
-        className='resize-none mb-2 w-full outline-none bg-primary-300 px-4 py-2 rounded-md text-sm'
+        className='resize-none mb-2 w-full outline-none placeholder-primary-900 bg-primary-300 px-4 py-2 rounded-md text-sm'
+        value={filterValue}
+        onChange={(e) => setFilter(e.target.value)}
         placeholder='Search Models...'
       />
-      {Object.values(models).map((mo, i) => (
-        <ModelButton model={mo.name} key={i} />
-      ))}
+      {Object.values(models)
+        .filter((model) => model.name.startsWith(filterValue))
+        .sort((model1, model2) => model1.name.localeCompare(model2.name))
+        .map((model, i) => (
+          <ModelButton model={model.name} key={i} />
+        ))}
     </div>
   )
 }
@@ -92,17 +98,21 @@ const CollapsibleSidebar: React.FC = () => {
         <div
           className={`${
             sidebarOpen ? 'visible' : 'hidden'
-          } overflow-hidden pt-5`}
+          } overflow-hidden pt-5 h-full`}
         >
           {/* Sidebar Content */}
 
           {/* Main Tabs */}
-          <div className='overflow-hidden text-nowrap grid space-y-4'>
-            <div className='flex items-center space-x-5 pl-5'>
+          <div className='overflow-hidden text-nowrap space-y-4 h-full flex flex-col'>
+            <div className='items-center space-x-5 pl-5'>
               <img src='/omhlogo-dark.svg' className='w-10' />
             </div>
-            <ModelsGroup models={models} />
-            <SidebarButtonGroup />
+            <div className='grow'>
+              <ModelsGroup models={models} />
+            </div>
+            <div className='py-5'>
+              <SidebarButtonGroup />
+            </div>
           </div>
 
           {/* Close Button */}

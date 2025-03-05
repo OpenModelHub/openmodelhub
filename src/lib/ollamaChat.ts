@@ -3,10 +3,15 @@ import { fetch } from '@tauri-apps/plugin-http'
 
 const OLLAMA_BASE_URL = 'http://localhost:11434/api' // TODO: change this to config when config feature is available
 
-export function streamGenerateResponse(model: string, inputPrompt: string) {
+export function streamGenerateResponse(
+  model: string,
+  inputPrompt: string,
+  context: number[]
+) {
   const requestBody: GenerateCompletionRequest = {
     model: model,
     prompt: inputPrompt,
+    context,
   }
 
   return streamPostFetch(

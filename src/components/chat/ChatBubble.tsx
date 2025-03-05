@@ -21,9 +21,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
   return (
     <>
       <div className='relative'>
-        {loading && (
-          <ArrowPathIcon className='w-5 animate-spin absolute -top-5 left-0 z-50' />
-        )}
+        {loading && <ArrowPathIcon className='w-5 animate-spin z-50' />}
       </div>
 
       <div

@@ -35,7 +35,7 @@
 
 OpenModelHub (OMH) is a lightweight and open-source desktop application to manage, download, and chat with models, either locally or in the cloud.
 
-OMH utilizes [ollama](https://ollama.com) as its main model searching API. Users can add their own model API using an API link and key.
+OMH utilizes [ollama](https://ollama.com) as its main model ing API. Users can add their own model API using an API link and key.
 
 OMH solves the problem of non-tech-savvy users not having a easy-to-use UI to manage and interact with their downloaded models locally.
 

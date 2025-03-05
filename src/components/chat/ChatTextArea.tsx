@@ -11,7 +11,7 @@ interface ChatAreaProps {
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
-  const { setMessages } = React.useContext(GlobalContext)
+  const { messages, setMessages } = React.useContext(GlobalContext)
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
@@ -28,6 +28,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
             message: appended,
             sender: 'bot',
             loading: !res.done,
+            context: res.context ? res.context : [],
           },
         ],
       }
@@ -37,6 +38,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   const submitPrompt = async () => {
     if (!promptText) return
     setLoading(true)
+    const prevContext = messages[currentModel].length
+      ? messages[currentModel][messages[currentModel].length - 1].context
+      : []
     setMessages((prev) => ({
       ...prev,
       [currentModel]: [
@@ -45,16 +49,22 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
           message: promptText,
           sender: 'user',
           loading: false,
+          context: [],
         },
         {
           message: '',
           sender: 'bot',
           loading: true,
+          context: [],
         },
       ],
     }))
 
-    const res = await streamGenerateResponse(currentModel, promptText)
+    const res = await streamGenerateResponse(
+      currentModel,
+      promptText,
+      prevContext
+    )
 
     // @ts-expect-error AsyncIterator must be implemented globally here
     for await (const chunk of res) {
@@ -91,7 +101,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
         value={promptText}
         disabled={loading}
         onChange={(e) => setPrompt(e.target.value)}
-        className='disabled:opacity-50 disabled:cursor-not-allowed border-blue-500 w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
+        className='disabled:opacity-50 disabled:cursor-not-allowed w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
         placeholder='Type a Message...'
       />
 

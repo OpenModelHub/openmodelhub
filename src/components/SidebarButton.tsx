@@ -19,13 +19,15 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({
   label,
   targetPage,
 }) => {
-  const { setPage } = React.useContext(GlobalContext)
+  const { setPage, page } = React.useContext(GlobalContext)
   const Icon = icon
   return (
     <Button
       variant='text'
       onClick={() => setPage(targetPage)}
-      className='flex items-center space-x-2 w-full'
+      className={`${
+        page == targetPage && 'bg-primary-300'
+      } flex items-center space-x-2 w-full`}
     >
       <Icon className='w-5 text-primary-900' />
       <Typography variant='body1' className='text-primary-900'>

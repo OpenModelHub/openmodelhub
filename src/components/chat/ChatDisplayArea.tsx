@@ -5,6 +5,7 @@ export interface ChatDisplayMessage {
   message: string
   sender: 'user' | 'bot'
   loading: boolean
+  context: TokenContext
 }
 
 interface ChatDisplayProps {
