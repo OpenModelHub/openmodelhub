@@ -12,25 +12,25 @@ interface ButtonProps {
   external?: boolean
 }
 
-const baseClasses = 'block px-4 py-1 rounded-md cursor-pointer underline-none'
+const baseClasses = 'block rounded-md cursor-pointer underline-none'
 const variantClasses = {
   // [light, dark]
   // light buttons have a dark foreground
   contained: [
-    'bg-primary-800 hover:bg-primary-900 active:bg-primary-900/95 text-white',
-    'bg-white hover:bg-primary-100 active:bg-primary-200 text-black',
+    'px-4 py-1 bg-primary-800 hover:bg-primary-900 active:bg-primary-900/95 text-white',
+    'px-4 py-1 bg-white hover:bg-primary-100 active:bg-primary-200 text-black',
   ],
   outlined: [
-    'border hover:bg-primary-900/5 active:bg-primary-900/10',
-    'border hover:bg-primary-100/10 active:bg-primary-100/15',
+    'px-4 py-1 border hover:bg-primary-900/5 active:bg-primary-900/10',
+    'px-4 py-1 border hover:bg-primary-100/10 active:bg-primary-100/15',
   ],
   text: [
-    'text-black hover:bg-primary-900/10 active:bg-primary-900/15',
-    'text-white hover:bg-primary-100/10 active:bg-primary-100/15',
+    'px-4 py-1 text-black hover:bg-primary-900/10 active:bg-primary-900/15',
+    'px-4 py-1 text-white hover:bg-primary-100/10 active:bg-primary-100/15',
   ],
   icon: [
-    'text-black hover:bg-primary-900/10 active:bg-primary-900/15 px-0 py-0 grid items-center justify-center',
-    'text-white hover:bg-primary-100/10 active:bg-primary-100/15 px-0 py-0 grid items-center justify-center',
+    'p-2 text-black hover:bg-primary-900/10 active:bg-primary-900/15 grid items-center justify-center',
+    'p-2 text-white hover:bg-primary-100/10 active:bg-primary-100/15 grid items-center justify-center',
   ],
 }
 

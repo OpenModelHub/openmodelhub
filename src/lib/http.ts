@@ -41,3 +41,9 @@ export async function streamPostFetch(
 
   return readableStream
 }
+
+export async function getFetch(uri: string): Promise<string> {
+  return invoke('fetch_get', {
+    uri,
+  })
+}

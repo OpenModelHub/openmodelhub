@@ -11,8 +11,7 @@ import { Squares2X2Icon } from '@heroicons/react/24/outline'
 import Typography from './Typography'
 import { GlobalContext } from '../pages/preview'
 import React from 'react'
-import ModelButton from './ModelButton'
-
+import ModelsGroup from './ModelsGroup'
 const SidebarButtonGroup = () => {
   return (
     <div className='relative px-2'>
@@ -51,30 +50,8 @@ const SidebarButtonGroup = () => {
   )
 }
 
-const ModelsGroup = ({ models }: { models: Record<string, Model> }) => {
-  const [filterValue, setFilter] = React.useState('')
-  return (
-    <div className='relative px-2'>
-      <input
-        type='text'
-        className='resize-none mb-2 w-full outline-none placeholder-primary-900 bg-primary-300 px-4 py-2 rounded-md text-sm'
-        value={filterValue}
-        onChange={(e) => setFilter(e.target.value)}
-        placeholder='Search Models...'
-      />
-      {Object.values(models)
-        .filter((model) => model.name.startsWith(filterValue))
-        .sort((model1, model2) => model1.name.localeCompare(model2.name))
-        .map((model, i) => (
-          <ModelButton model={model.name} key={i} />
-        ))}
-    </div>
-  )
-}
-
 const CollapsibleSidebar: React.FC = () => {
-  const { sidebarOpen, setSidebarOpen, models } =
-    React.useContext(GlobalContext)
+  const { sidebarOpen, setSidebarOpen } = React.useContext(GlobalContext)
 
   const toggleSidebar = () => {
     setSidebarOpen((x) => !x)
@@ -88,7 +65,7 @@ const CollapsibleSidebar: React.FC = () => {
           className='absolute top-5 left-5 z-50 w-10 h-10'
           onClick={toggleSidebar}
         >
-          <ViewColumnsIcon className='w-7 h-7 text-primary-900' />
+          <ViewColumnsIcon className='w-7 text-primary-900' />
         </Button>
       )}
       <div
@@ -109,7 +86,7 @@ const CollapsibleSidebar: React.FC = () => {
               <img src='/omhlogo-dark.svg' className='w-10' />
             </div>
             <div className='grow overflow-auto'>
-              <ModelsGroup models={models} />
+              <ModelsGroup />
             </div>
             <div className='pb-5'>
               <SidebarButtonGroup />
@@ -122,7 +99,7 @@ const CollapsibleSidebar: React.FC = () => {
             className='absolute top-5 right-5 z-50 w-10 h-10'
             onClick={toggleSidebar}
           >
-            <XMarkIcon className='w-7 h-7 text-primary-900' />
+            <XMarkIcon className='w-7 text-primary-900' />
           </Button>
         </div>
       </div>
