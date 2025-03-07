@@ -36,7 +36,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({
       }}
       className={`${
         page == targetPage && 'bg-primary-300'
-      } flex items-center space-x-2 w-full`}
+      } flex items-center space-x-2 w-full select-none`}
     >
       <Icon className='w-5 text-primary-900' />
       <Typography variant='body1' className='text-primary-900 relative'>

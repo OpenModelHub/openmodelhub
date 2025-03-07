@@ -24,7 +24,8 @@ export const NotificationContext =
   React.createContext<NotificationContextState>({} as NotificationContextState)
 
 const MAXLEN = 50
-export const Notification: React.FC<Notification> = ({ type, message }) => {
+export const Notification: React.FC<Notification> = ({ type, message, id }) => {
+  const { deleteNotification } = React.useContext(NotificationContext)
   const [expanded, setExpanded] = React.useState(false)
   const baseClass =
     'pl-6 pr-4 py-3 flex whitespace-pre-wrap rounded-xl lg:w-md sm:w-xs w-60 relative shadow-lg shadow-primary-800/20 text-white font-semibold block text-left'
@@ -58,7 +59,12 @@ export const Notification: React.FC<Notification> = ({ type, message }) => {
         <Button variant='icon' color='dark' className='text-white'>
           <Square2StackIcon className='w-5' />
         </Button>
-        <Button variant='icon' color='dark' className='text-white'>
+        <Button
+          variant='icon'
+          color='dark'
+          className='text-white'
+          onClick={() => deleteNotification(id)}
+        >
           <XMarkIcon className='w-5' />
         </Button>
       </div>
@@ -92,7 +98,7 @@ export const NotificationGroup = () => {
     <div className='absolute z-50 top-5 grid space-y-2 items-center justify-center right-5'>
       {notifications.map((notification) => (
         <Notification
-          id={`notification-${notification.id}`}
+          id={notification.id}
           type={notification.type}
           message={notification.message}
           key={notification.id}

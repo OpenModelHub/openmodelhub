@@ -73,13 +73,13 @@ const CollapsibleSidebar: React.FC = () => {
           sidebarOpen ? 'w-60' : 'w-0'
         } left-0 transition-width duration-300 bg-primary-100 border-r-1 border-primary-400`}
       >
+        {/* Sidebar Content */}
+
         <div
           className={`${
             sidebarOpen ? 'visible' : 'hidden'
           } overflow-hidden pt-5 h-full`}
         >
-          {/* Sidebar Content */}
-
           {/* Main Tabs */}
           <div className='overflow-hidden text-nowrap h-full flex flex-col'>
             <div className='items-center space-x-5 pl-5 mb-5'>

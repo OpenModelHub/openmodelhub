@@ -1,5 +1,5 @@
 import React from 'react'
-import Typography from './Typography'
+import Typography from '../Typography'
 
 interface StatusProps {
   status: 'available' | 'running' | 'connected' | 'offline'

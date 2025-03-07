@@ -42,8 +42,10 @@ export async function streamPostFetch(
   return readableStream
 }
 
+const FETCH_TIMEOUT_DURATION = 2500
 export async function getFetch(uri: string): Promise<string> {
   return invoke('fetch_get', {
     uri,
+    timeoutMs: FETCH_TIMEOUT_DURATION,
   })
 }

@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use tauri::ipc::Channel;
 use tauri_plugin_http::reqwest;
@@ -32,10 +34,10 @@ async fn fetch_post_stream(
 }
 
 #[tauri::command]
-async fn fetch_get(uri: String) -> Result<String, String> {
+async fn fetch_get(uri: String, timeout_ms: u64) -> Result<String, String> {
     let client = reqwest::Client::new();
 
-    let response = client.get(uri).send().await.map_err(|err| err.to_string())?;
+    let response = client.get(uri).timeout(Duration::from_millis(timeout_ms)).send().await.map_err(|err| err.to_string())?;
 
     let txt = response.text().await.map_err(|err| err.to_string())?;
 

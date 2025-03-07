@@ -2,8 +2,8 @@ import React from 'react'
 import { GlobalContext } from '../../pages/preview'
 import Typography from '../Typography'
 import Button from '../Button'
-import { ArrowPathIcon } from '@heroicons/react/24/outline'
-import ModelButton from '../ModelButton'
+import { ArrowPathIcon, FolderOpenIcon } from '@heroicons/react/24/outline'
+import ModelButton from './ModelButton'
 import { fetchModels } from '../../lib/ollamaChat'
 import { NotificationContext } from '../Notification'
 import { ChatDisplayMessage } from '../chat/ChatDisplayArea'
@@ -13,17 +13,21 @@ const ModelsGroup = () => {
   const [fetchLoading, setLoading] = React.useState(false)
   const [filterValue, setFilter] = React.useState('')
 
-  const refreshModels = async () => {
+  const refreshModels = () => {
     setLoading(true)
-    const models = await fetchModels()
+    fetchModels()
+      .then((models) => {
+        const initModelInfo: Record<string, Model> = {}
+        models.models.forEach((model) => {
+          initModelInfo[model.name] = model
+        })
 
-    const initModelInfo: Record<string, Model> = {}
-    models.models.forEach((model) => {
-      initModelInfo[model.name] = model
-    })
-
-    setModels(initModelInfo)
-    setLoading(false)
+        setModels(initModelInfo)
+      })
+      .catch((e) => {
+        pushNotification('error', e)
+      })
+      .finally(() => setLoading(false))
   }
 
   const filtered = Object.values(models)
@@ -76,9 +80,24 @@ const ModelsGroup = () => {
           <ArrowPathIcon className={`w-4 ${fetchLoading && 'animate-spin'}`} />
         </Button>
       </div>
-      {filtered.map((model, i) => (
-        <ModelButton model={model.name} key={i} />
-      ))}
+
+      {filtered.length > 0 ? (
+        filtered.map((model, i) => <ModelButton model={model.name} key={i} />)
+      ) : (
+        <div className='select-none w-full mt-10 items-center justify-center grid space-y-1'>
+          <FolderOpenIcon
+            className='w-full items-center justify-center text-gray-400'
+            width={50}
+            height={50}
+          />
+          <Typography
+            className='text-center w-30 text-wrap text-gray-400'
+            variant='caption'
+          >
+            Whoops! Cannot find any models.
+          </Typography>
+        </div>
+      )}
     </div>
   )
 }

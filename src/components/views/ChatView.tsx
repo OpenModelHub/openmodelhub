@@ -1,7 +1,7 @@
 import React from 'react'
 import ChatDisplayArea from '../chat/ChatDisplayArea'
 import ChatArea from '../chat/ChatTextArea'
-import Status from '../Status'
+import Status from '../chat/Status'
 import Typography from '../Typography'
 import { GlobalContext } from '../../pages/preview'
 

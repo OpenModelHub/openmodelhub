@@ -12,7 +12,7 @@ interface ButtonProps {
   external?: boolean
 }
 
-const baseClasses = 'block rounded-md cursor-pointer underline-none'
+const baseClasses = 'block rounded-md cursor-pointer underline-none select-none'
 const variantClasses = {
   // [light, dark]
   // light buttons have a dark foreground
