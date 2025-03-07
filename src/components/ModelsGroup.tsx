@@ -5,9 +5,11 @@ import Button from './Button'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import ModelButton from './ModelButton'
 import { fetchModels } from '../lib/ollamaChat'
+import { NotificationContext } from './Notification'
+import { ChatDisplayMessage } from './chat/ChatDisplayArea'
 
 const ModelsGroup = () => {
-  const { models, setModels } = React.useContext(GlobalContext)
+  const { models, setModels, setMessages } = React.useContext(GlobalContext)
   const [fetchLoading, setLoading] = React.useState(false)
   const [filterValue, setFilter] = React.useState('')
 
@@ -27,6 +29,31 @@ const ModelsGroup = () => {
   const filtered = Object.values(models)
     .filter((model) => model.name.startsWith(filterValue))
     .sort((model1, model2) => model1.name.localeCompare(model2.name))
+
+  const { pushNotification } = React.useContext(NotificationContext)
+
+  const fetchInitialModels = () => {
+    fetchModels()
+      .then((models) => {
+        const initModelMessages: Record<string, ChatDisplayMessage[]> = {}
+        const initModelInfo: Record<string, Model> = {}
+        models.models.forEach((model) => {
+          initModelMessages[model.name] = []
+          initModelInfo[model.name] = model
+        })
+
+        setMessages(initModelMessages)
+        setModels(initModelInfo)
+      })
+      .catch((e) => {
+        pushNotification('error', e)
+      })
+  }
+
+  React.useEffect(() => {
+    // TODO: add loading screen
+    fetchInitialModels()
+  }, [])
 
   return (
     <div className='relative px-2'>

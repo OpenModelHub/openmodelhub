@@ -2,7 +2,11 @@ import React from 'react'
 import CollapsibleSidebar from '../../components/CollapsibleSidebar'
 import MainView from '../../components/MainView'
 import { ChatDisplayMessage } from '../../components/chat/ChatDisplayArea'
-import { fetchModels } from '../../lib/ollamaChat'
+import {
+  NotificationContext,
+  NotificationGroup,
+  useNotification,
+} from '../../components/Notification'
 
 export type ValidPage =
   | 'tab:manageModels'
@@ -39,23 +43,7 @@ export default function Preview() {
   >({}) // maybe this could be better than loading all messages to RAM
   const [models, setModels] = React.useState<Record<string, Model>>({})
 
-  React.useEffect(() => {
-    // TODO: add loading screen
-    // fetch models
-    ;(async () => {
-      const models = await fetchModels()
-
-      const initModelMessages: Record<string, ChatDisplayMessage[]> = {}
-      const initModelInfo: Record<string, Model> = {}
-      models.models.forEach((model) => {
-        initModelMessages[model.name] = []
-        initModelInfo[model.name] = model
-      })
-
-      setMessages(initModelMessages)
-      setModels(initModelInfo)
-    })()
-  }, [])
+  const notificationValue = useNotification()
 
   return (
     <GlobalContext.Provider
@@ -70,11 +58,13 @@ export default function Preview() {
         setModels,
       }}
     >
-      {/* <PreviewFloating /> */}
-      <div className='flex bg-primary-100'>
-        <CollapsibleSidebar />
-        <MainView />
-      </div>
+      <NotificationContext.Provider value={notificationValue}>
+        <NotificationGroup />
+        <div className='flex bg-primary-100'>
+          <CollapsibleSidebar />
+          <MainView />
+        </div>
+      </NotificationContext.Provider>
     </GlobalContext.Provider>
   )
 }

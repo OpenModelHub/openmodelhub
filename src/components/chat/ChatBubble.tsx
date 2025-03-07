@@ -15,13 +15,13 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
 }) => {
   const bubbleClasses =
     sender === 'user'
-      ? 'bg-blue-500 rounded-tr-none text-white self-end'
+      ? 'bg-blue-500 text-white self-end'
       : 'bg-gray-300 text-black self-start'
 
   return (
     <>
       <div className='relative'>
-        {loading && <ArrowPathIcon className='w-5 animate-spin z-50' />}
+        {loading && <ArrowPathIcon className='w-5 animate-spin' />}
       </div>
 
       <div

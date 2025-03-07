@@ -62,7 +62,7 @@ const CollapsibleSidebar: React.FC = () => {
       {!sidebarOpen && (
         <Button
           variant='icon'
-          className='absolute top-5 left-5 z-50 w-10 h-10'
+          className='absolute top-5 left-5 w-10 h-10'
           onClick={toggleSidebar}
         >
           <ViewColumnsIcon className='w-7 text-primary-900' />
@@ -71,7 +71,7 @@ const CollapsibleSidebar: React.FC = () => {
       <div
         className={`h-screen relative ${
           sidebarOpen ? 'w-60' : 'w-0'
-        } left-0 z-50 transition-width duration-300 bg-primary-100 border-r-1 border-primary-400`}
+        } left-0 transition-width duration-300 bg-primary-100 border-r-1 border-primary-400`}
       >
         <div
           className={`${
@@ -96,7 +96,7 @@ const CollapsibleSidebar: React.FC = () => {
           {/* Close Button */}
           <Button
             variant='icon'
-            className='absolute top-5 right-5 z-50 w-10 h-10'
+            className='absolute top-5 right-5 w-10 h-10'
             onClick={toggleSidebar}
           >
             <XMarkIcon className='w-7 text-primary-900' />

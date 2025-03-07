@@ -38,6 +38,9 @@ importers:
       tailwindcss:
         specifier: ^4.0.6
         version: 4.0.6
+      uuid:
+        specifier: ^11.1.0
+        version: 11.1.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.21.0
@@ -1750,6 +1753,10 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+    hasBin: true
 
   vite@6.1.0:
     resolution: {integrity: sha512-RjjMipCKVoR4hVfPY6GQTgveinjNuyLw+qruksLDvA5ktI1150VmcMBKmQaEWJhg/j6Uaf6dNCNA0AfdzUb/hQ==}
@@ -3634,6 +3641,8 @@ snapshots:
       use-isomorphic-layout-effect: 1.2.0(@types/react@18.3.18)(react@18.3.1)
     optionalDependencies:
       '@types/react': 18.3.18
+
+  uuid@11.1.0: {}
 
   vite@6.1.0(jiti@2.4.2)(lightningcss@1.29.1):
     dependencies:
