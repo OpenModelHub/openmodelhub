@@ -1,5 +1,5 @@
 import React from 'react'
-import CollapsibleSidebar from '../../components/CollapsibleSidebar'
+import CollapsibleSidebar from '../../components/sidebar/CollapsibleSidebar'
 import MainView from '../../components/MainView'
 import { ChatDisplayMessage } from '../../components/chat/ChatDisplayArea'
 import {

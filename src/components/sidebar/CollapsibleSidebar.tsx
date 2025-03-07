@@ -1,4 +1,4 @@
-import Button from './Button'
+import Button from '../Button'
 import {
   CloudArrowDownIcon,
   Cog6ToothIcon,
@@ -8,8 +8,8 @@ import {
 } from '@heroicons/react/24/outline'
 import SidebarButton from './SidebarButton'
 import { Squares2X2Icon } from '@heroicons/react/24/outline'
-import Typography from './Typography'
-import { GlobalContext } from '../pages/preview'
+import Typography from '../Typography'
+import { GlobalContext } from '../../pages/preview'
 import React from 'react'
 import ModelsGroup from './ModelsGroup'
 const SidebarButtonGroup = () => {

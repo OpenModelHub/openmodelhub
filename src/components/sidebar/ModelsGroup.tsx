@@ -1,12 +1,12 @@
 import React from 'react'
-import { GlobalContext } from '../pages/preview'
-import Typography from './Typography'
-import Button from './Button'
+import { GlobalContext } from '../../pages/preview'
+import Typography from '../Typography'
+import Button from '../Button'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
-import ModelButton from './ModelButton'
-import { fetchModels } from '../lib/ollamaChat'
-import { NotificationContext } from './Notification'
-import { ChatDisplayMessage } from './chat/ChatDisplayArea'
+import ModelButton from '../ModelButton'
+import { fetchModels } from '../../lib/ollamaChat'
+import { NotificationContext } from '../Notification'
+import { ChatDisplayMessage } from '../chat/ChatDisplayArea'
 
 const ModelsGroup = () => {
   const { models, setModels, setMessages } = React.useContext(GlobalContext)
