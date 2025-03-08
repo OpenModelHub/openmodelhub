@@ -11,26 +11,6 @@ interface ChatViewProps {
 
 const ChatView: React.FC<ChatViewProps> = ({ model }) => {
   const { messages, models } = React.useContext(GlobalContext)
-  const chatRef = React.createRef<HTMLDivElement>()
-  React.useEffect(() => {
-    const element = chatRef.current
-    if (!element) return
-    const handleScroll = () => {
-      if (
-        Math.abs(
-          element.scrollHeight - (element.scrollTop + element.clientHeight)
-        ) <= 1
-      ) {
-        element.scrollTop = element.scrollHeight
-      }
-    }
-
-    element.addEventListener('scroll', handleScroll)
-
-    return () => {
-      element.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   return (
     <>
@@ -42,12 +22,7 @@ const ChatView: React.FC<ChatViewProps> = ({ model }) => {
         <Status status='available' />
       </div>
       {/* texts */}
-      <div
-        ref={chatRef}
-        className='flex-grow flex flex-col overflow-y-auto max-h-screen'
-      >
-        <ChatDisplayArea messages={messages[model]} />
-      </div>
+      <ChatDisplayArea messages={messages[model]} />
       {/* footer, textarea etc */}
       <div className='sticky bottom-0 pb-4 py-2 bg-primary-100'>
         <ChatArea currentModel={model} />

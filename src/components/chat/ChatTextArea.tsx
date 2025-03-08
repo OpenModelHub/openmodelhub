@@ -10,11 +10,12 @@ interface ChatAreaProps {
   currentModel: string
 }
 
+export const chatTextareaRef = React.createRef<HTMLTextAreaElement>()
+
 const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   const { messages, setMessages } = React.useContext(GlobalContext)
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
   const appendLastMessage = (res: GenerateCompletionResponse) => {
     setMessages((prev) => {
@@ -77,7 +78,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
     setLoading(false)
     // need to wait for the undisabled textarea to be rendered first, so we need a timeout.
     setTimeout(() => {
-      textareaRef.current?.focus()
+      chatTextareaRef.current?.focus()
     }, 10)
   }
 
@@ -95,7 +96,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
     <div className='disabled:opacity-50 disabled:cursor-not-allowed'>
       <TextareaAutosize
         autoFocus
-        ref={textareaRef}
+        ref={chatTextareaRef}
         minRows={2}
         maxRows={4}
         value={promptText}
