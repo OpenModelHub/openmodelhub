@@ -23,6 +23,7 @@ const ModelsGroup = () => {
         })
 
         setModels(initModelInfo)
+        pushNotification('success', 'Successfully refreshed models.')
       })
       .catch((e) => {
         pushNotification('error', e)
@@ -48,6 +49,8 @@ const ModelsGroup = () => {
 
         setMessages(initModelMessages)
         setModels(initModelInfo)
+
+        pushNotification('success', 'Successfully fetched models.')
       })
       .catch((e) => {
         pushNotification('error', e)

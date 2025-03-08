@@ -24,6 +24,7 @@ export const NotificationContext =
   React.createContext<NotificationContextState>({} as NotificationContextState)
 
 const MAXLEN = 50
+const NOTIFICATION_TIMEOUT = 2500
 export const Notification: React.FC<Notification> = ({ type, message, id }) => {
   const { deleteNotification } = React.useContext(NotificationContext)
   const [expanded, setExpanded] = React.useState(false)
@@ -36,6 +37,20 @@ export const Notification: React.FC<Notification> = ({ type, message, id }) => {
     warning: 'bg-yellow-900',
     error: 'bg-red-900',
   }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(message)
+  }
+
+  React.useEffect(() => {
+    // don't timeout on errors
+    if (type == 'error') return
+    const timeout = setTimeout(
+      () => deleteNotification(id),
+      NOTIFICATION_TIMEOUT
+    )
+    return () => clearTimeout(timeout)
+  }, [])
 
   return (
     <div className={`${baseClass} ${variantClasses[type]}`}>
@@ -56,7 +71,12 @@ export const Notification: React.FC<Notification> = ({ type, message, id }) => {
         {expanded ? message : cutStrLen(message, MAXLEN)}
       </Typography>
       <div className='absolute right-2 top-0.5 flex -space-x-2.5 z-10'>
-        <Button variant='icon' color='dark' className='text-white'>
+        <Button
+          variant='icon'
+          color='dark'
+          className='text-white'
+          onClick={copyToClipboard}
+        >
           <Square2StackIcon className='w-5' />
         </Button>
         <Button
