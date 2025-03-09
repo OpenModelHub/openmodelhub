@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/24/outline'
 import SidebarButton from './SidebarButton'
 import { Squares2X2Icon } from '@heroicons/react/24/outline'
-import Typography from '../Typography'
 import { GlobalContext } from '../../pages/preview'
 import React from 'react'
 import ModelsGroup from './ModelsGroup'
@@ -39,13 +38,6 @@ const SidebarButtonGroup = () => {
         targetPage='tab:settings'
         label='Settings'
       />
-
-      <Typography
-        variant='caption'
-        className='absolute bottom-2 right-5 text-primary-600'
-      >
-        v.0.0.1p
-      </Typography>
     </div>
   )
 }

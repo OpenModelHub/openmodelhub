@@ -5,14 +5,29 @@ import Typography from '../Typography'
 import React from 'react'
 import { streamGenerateResponse } from '../../lib/ollamaChat'
 import { GlobalContext } from '../../pages/preview'
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 
 interface ChatAreaProps {
   currentModel: string
 }
 
-export const chatTextareaRef = React.createRef<HTMLTextAreaElement>()
+const ClearChatButton = ({ clearChat }: { clearChat: () => void }) => {
+  return (
+    <div className='grid justify-center'>
+      <Button
+        className='w-fit space-x-2 shadow-md flex'
+        variant='outlined'
+        onClick={() => clearChat()}
+      >
+        <ChatBubbleOvalLeftEllipsisIcon className='w-4.5' />
+        <Typography variant='body1'>New Chat</Typography>
+      </Button>
+    </div>
+  )
+}
 
 const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
+  const chatTextareaRef = React.createRef<HTMLTextAreaElement>()
   const { messages, setMessages } = React.useContext(GlobalContext)
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
@@ -82,6 +97,12 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
     }, 10)
   }
 
+  const clearChat = () => {
+    setMessages((prev) => {
+      return { ...prev, [currentModel]: [] }
+    })
+  }
+
   const keystrokeSend = (e: KeyboardEvent) => {
     if (e.key === 'Enter' && e.ctrlKey && !loading && promptText != '')
       submitPrompt()
@@ -93,32 +114,35 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   })
 
   return (
-    <div className='disabled:opacity-50 disabled:cursor-not-allowed'>
-      <TextareaAutosize
-        autoFocus
-        ref={chatTextareaRef}
-        minRows={2}
-        maxRows={4}
-        value={promptText}
-        disabled={loading}
-        onChange={(e) => setPrompt(e.target.value)}
-        className='disabled:opacity-50 disabled:cursor-not-allowed w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
-        placeholder='Type a Message...'
-      />
+    <>
+      <ClearChatButton clearChat={clearChat} />
+      <div className='disabled:opacity-50 disabled:cursor-not-allowed mt-4 relative'>
+        <TextareaAutosize
+          autoFocus
+          ref={chatTextareaRef}
+          minRows={2}
+          maxRows={8}
+          value={promptText}
+          disabled={loading}
+          onChange={(e) => setPrompt(e.target.value)}
+          className='disabled:opacity-50 disabled:cursor-not-allowed w-full px-6 py-4 rounded-xl outline-none placeholder-primary-900 bg-primary-300 text-primary-900 resize-none'
+          placeholder='Type a Message...'
+        />
 
-      <Button
-        variant='contained'
-        onClick={submitPrompt}
-        disabled={loading}
-        className='disabled:opacity-50 disabled:cursor-not-allowed absolute top-5 right-3'
-      >
-        <ArrowTurnDownRightIcon className='w-6' />
-      </Button>
+        <Button
+          variant='contained'
+          onClick={submitPrompt}
+          disabled={loading}
+          className='disabled:opacity-50 disabled:cursor-not-allowed absolute top-3 right-3'
+        >
+          <ArrowTurnDownRightIcon className='w-6' />
+        </Button>
 
-      <Typography variant='caption'>
-        Press <b>Ctrl+Enter</b> to send
-      </Typography>
-    </div>
+        <Typography variant='caption'>
+          Press <b>Ctrl+Enter</b> to send
+        </Typography>
+      </div>
+    </>
   )
 }
 

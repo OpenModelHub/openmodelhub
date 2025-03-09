@@ -3,7 +3,11 @@ import Typography from './Typography'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import Button from './Button'
 import { cutStrLen } from '../lib/util'
-import { ChevronUpIcon, Square2StackIcon } from '@heroicons/react/24/outline'
+import {
+  CheckIcon,
+  ChevronUpIcon,
+  Square2StackIcon,
+} from '@heroicons/react/24/outline'
 import { v4 as uuidv4 } from 'uuid'
 
 type NotificationType = 'info' | 'success' | 'warning' | 'error'
@@ -24,22 +28,28 @@ export const NotificationContext =
   React.createContext<NotificationContextState>({} as NotificationContextState)
 
 const MAXLEN = 50
-const NOTIFICATION_TIMEOUT = 2500
+const NOTIFICATION_TIMEOUT = 2000
+const COPY_TIMEOUT = 750
+
 export const Notification: React.FC<Notification> = ({ type, message, id }) => {
   const { deleteNotification } = React.useContext(NotificationContext)
   const [expanded, setExpanded] = React.useState(false)
+  const [copyLoading, setCopyLoading] = React.useState(false)
   const baseClass =
-    'pl-6 pr-4 py-3 flex whitespace-pre-wrap rounded-xl lg:w-md sm:w-xs w-60 relative shadow-lg shadow-primary-800/20 text-white font-semibold block text-left'
+    'pl-6 pr-4 py-3 flex whitespace-pre-wrap rounded-xl lg:w-md sm:w-xs w-60 relative shadow-lg border text-black font-semibold block text-left'
 
   const variantClasses = {
-    info: 'bg-primary-900',
-    success: 'bg-green-900',
-    warning: 'bg-yellow-900',
-    error: 'bg-red-900',
+    info: 'bg-primary-100 border-primary-900',
+    success: 'bg-green-100 border-green-900',
+    warning: 'bg-yellow-100 border-yellow-900',
+    error: 'bg-red-100 border-red-900',
   }
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(message)
+    setCopyLoading(true)
+
+    setTimeout(() => setCopyLoading(false), COPY_TIMEOUT)
   }
 
   React.useEffect(() => {
@@ -73,18 +83,17 @@ export const Notification: React.FC<Notification> = ({ type, message, id }) => {
       <div className='absolute right-2 top-0.5 flex -space-x-2.5 z-10'>
         <Button
           variant='icon'
-          color='dark'
-          className='text-white'
+          className={type == 'error' ? 'visible' : 'hidden'}
           onClick={copyToClipboard}
+          disabled={copyLoading}
         >
-          <Square2StackIcon className='w-5' />
+          {!copyLoading ? (
+            <Square2StackIcon className='w-5' />
+          ) : (
+            <CheckIcon className='w-5' />
+          )}
         </Button>
-        <Button
-          variant='icon'
-          color='dark'
-          className='text-white'
-          onClick={() => deleteNotification(id)}
-        >
+        <Button variant='icon' onClick={() => deleteNotification(id)}>
           <XMarkIcon className='w-5' />
         </Button>
       </div>
