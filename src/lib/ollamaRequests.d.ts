@@ -21,11 +21,10 @@ interface ChatCompletionResponse {
   eval_duration?: number
 }
 
+type ChatRole = 'user' | 'system' | 'assistant' | 'tool'
+
 interface ChatMessage {
-  // 'bot' is unofficial and undocumented
-  // read: https://github.com/ollama/ollama/blob/main/docs/api.md#generate-a-chat-completion
-  // you probably could use any string though
-  role: 'user' | 'system' | 'assistant' | 'tool' | 'bot'
+  role: ChatRole
   content: string
   images?: string[]
   tool_calls?: ToolCall[]

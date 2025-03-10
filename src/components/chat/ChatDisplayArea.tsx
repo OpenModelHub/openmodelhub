@@ -4,9 +4,8 @@ import Typography from '../Typography'
 
 export interface ChatDisplayMessage {
   message: string
-  sender: 'user' | 'bot'
+  role: ChatRole
   loading: boolean
-  context: TokenContext
 }
 
 interface ChatDisplayProps {
@@ -35,7 +34,7 @@ const ChatDisplayArea: React.FC<ChatDisplayProps> = ({ messages }) => {
             key={index}
             loading={msg.loading}
             message={msg.message}
-            sender={msg.sender}
+            role={msg.role}
           />
         ))
       ) : (

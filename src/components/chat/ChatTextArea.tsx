@@ -3,9 +3,10 @@ import { ArrowTurnDownRightIcon } from '@heroicons/react/24/solid'
 import Button from '../Button'
 import Typography from '../Typography'
 import React from 'react'
-import { streamGenerateResponse } from '../../lib/ollamaChat'
+import { streamGenerateChat } from '../../lib/ollamaChat'
 import { GlobalContext } from '../../pages/preview'
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
+import { ChatDisplayMessage } from './ChatDisplayArea'
 
 interface ChatAreaProps {
   currentModel: string
@@ -32,19 +33,18 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   const [promptText, setPrompt] = React.useState('')
   const [loading, setLoading] = React.useState(false)
 
-  const appendLastMessage = (res: GenerateCompletionResponse) => {
+  const appendLastMessage = (res: ChatCompletionResponse) => {
     setMessages((prev) => {
       const len = prev[currentModel].length
-      const appended = prev[currentModel][len - 1].message + res.response
+      const appended = prev[currentModel][len - 1].message + res.message.content
       return {
         ...prev,
         [currentModel]: [
           ...prev[currentModel].slice(0, len - 1),
           {
             message: appended,
-            sender: 'bot',
+            role: res.message.role,
             loading: !res.done,
-            context: res.context ? res.context : [],
           },
         ],
       }
@@ -54,32 +54,30 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   const submitPrompt = async () => {
     if (!promptText) return
     setLoading(true)
-    const prevContext = messages[currentModel].length
-      ? messages[currentModel][messages[currentModel].length - 1].context
-      : []
-    setMessages((prev) => ({
-      ...prev,
+    const curMessages: Record<string, ChatDisplayMessage[]> = {
+      ...messages,
       [currentModel]: [
-        ...prev[currentModel],
+        ...messages[currentModel],
         {
           message: promptText,
-          sender: 'user',
+          role: 'user',
           loading: false,
-          context: [],
         },
         {
           message: '',
-          sender: 'bot',
+          role: 'assistant',
           loading: true,
-          context: [],
         },
       ],
-    }))
+    }
 
-    const res = await streamGenerateResponse(
+    setMessages(curMessages)
+    const res = await streamGenerateChat(
       currentModel,
-      promptText,
-      prevContext
+      curMessages[currentModel].map((x) => ({
+        role: x.role,
+        content: x.message,
+      }))
     )
 
     // @ts-expect-error AsyncIterator must be implemented globally here

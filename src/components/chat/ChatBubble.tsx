@@ -4,17 +4,13 @@ import Typography from '../Typography'
 
 interface ChatBubbleProps {
   message: string
-  sender: 'user' | 'bot'
+  role: ChatRole
   loading: boolean
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({
-  message,
-  sender,
-  loading,
-}) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
   const bubbleClasses =
-    sender === 'user'
+    role === 'user'
       ? 'bg-blue-500 text-white self-end'
       : 'bg-gray-300 text-black self-start'
 
