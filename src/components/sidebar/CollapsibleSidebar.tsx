@@ -54,7 +54,7 @@ const CollapsibleSidebar: React.FC = () => {
       {!sidebarOpen && (
         <Button
           variant='icon'
-          className='absolute top-5 left-5 w-10 h-10'
+          className='absolute top-5 left-5 w-10 h-10 bg-primary-100'
           onClick={toggleSidebar}
         >
           <ViewColumnsIcon className='w-7 text-primary-900' />
@@ -88,7 +88,7 @@ const CollapsibleSidebar: React.FC = () => {
           {/* Close Button */}
           <Button
             variant='icon'
-            className='absolute top-5 right-5 w-10 h-10'
+            className='absolute top-5 right-5 w-10 h-10 bg-primary-100'
             onClick={toggleSidebar}
           >
             <XMarkIcon className='w-7 text-primary-900' />

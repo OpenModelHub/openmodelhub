@@ -15,6 +15,10 @@
 }
 
 @layer base {
+  b {
+    @apply font-semibold;
+  }
+
   /* width */
   ::-webkit-scrollbar {
     @apply w-1 h-1;
