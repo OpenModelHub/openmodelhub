@@ -25,7 +25,7 @@ const ChatView: React.FC<ChatViewProps> = ({ model }) => {
   return (
     <>
       {/* heading, titles etc */}
-      <div className='sticky top-0 pt-3 py-2 bg-primary-100'>
+      <div className='sticky top-0 z-10 pt-3 py-2 bg-primary-100'>
         <div className='flex space-x-2 items-center'>
           <Typography variant='h4'>
             {model} (Local, {(models[model].size / 1e9).toFixed(1)}GB)

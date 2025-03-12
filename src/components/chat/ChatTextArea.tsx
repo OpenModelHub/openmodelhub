@@ -14,7 +14,7 @@ interface ChatAreaProps {
 
 const ClearChatButton = ({ clearChat }: { clearChat: () => void }) => {
   return (
-    <div className='grid justify-center'>
+    <div className='absolute w-full -top-10 grid justify-center'>
       <Button
         className='w-fit space-x-2 shadow-md flex'
         variant='outlined'
@@ -114,7 +114,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
   return (
     <>
       <ClearChatButton clearChat={clearChat} />
-      <div className='disabled:opacity-50 disabled:cursor-not-allowed mt-4 relative'>
+      <div className='disabled:opacity-50 disabled:cursor-not-allowed relative'>
         <TextareaAutosize
           autoFocus
           ref={chatTextareaRef}

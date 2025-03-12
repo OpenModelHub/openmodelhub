@@ -68,7 +68,7 @@ const ModelsGroup = () => {
           variant='icon'
           onClick={() => retrieveModels()}
           disabled={fetchLoading}
-          className='absolute right-1 top-0.5 p-2 bg-primary-300 disabled:cursor-not-allowed disabled:opacity-40'
+          className='absolute right-1 top-0.5 p-2 disabled:cursor-not-allowed disabled:opacity-40'
         >
           <ArrowPathIcon className={`w-4 ${fetchLoading && 'animate-spin'}`} />
         </Button>

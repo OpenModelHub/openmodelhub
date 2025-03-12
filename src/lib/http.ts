@@ -1,21 +1,21 @@
-import { Channel, invoke, isTauri } from '@tauri-apps/api/core'
+import { Channel, invoke } from '@tauri-apps/api/core'
 
 export async function streamPostFetch(
   uri: string,
   body: string
 ): Promise<ReadableStream<Uint8Array>> {
-  if (!isTauri()) {
-    const x = await fetch(uri, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Transfer-Encoding': 'chunked',
-      },
-      body,
-    })
-    // @ts-expect-error ts cannot
-    return x.body
-  }
+  // if (!isTauri()) {
+  //   const x = await fetch(uri, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Transfer-Encoding': 'chunked',
+  //     },
+  //     body,
+  //   })
+  //   // @ts-expect-error ts cannot
+  //   return x.body
+  // }
 
   const onEvent = new Channel<ArrayBuffer | number[]>()
 

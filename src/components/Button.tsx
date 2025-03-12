@@ -29,8 +29,8 @@ const variantClasses = {
     'px-4 py-1 rounded-md text-white hover:brightness-105 active:brightness-110',
   ],
   icon: [
-    'p-2 rounded-md text-black hover:brightness-95 active:brightness-90 grid items-center justify-center',
-    'p-2 rounded-md text-white hover:brightness-105 active:brightness-110 grid items-center justify-center',
+    'p-2 rounded-md text-black hover:bg-primary-200/50 hover:brightness-80 active:brightness-70 grid items-center justify-center',
+    'p-2 rounded-md text-white hover:bg-primary-200/50 hover:brightness-120 active:brightness-130 grid items-center justify-center',
   ],
 }
 
