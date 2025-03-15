@@ -2,7 +2,6 @@ import React from 'react'
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import Typography from '../Typography'
 import { CheckIcon, Square2StackIcon } from '@heroicons/react/24/outline'
-import Button from '../Button'
 
 interface ChatBubbleProps {
   message: string
@@ -27,10 +26,10 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
 
   return (
     <div className='flex flex-col group mb-1'>
-      <div>{loading && <ArrowPathIcon className='w-5 animate-spin' />}</div>
+      {loading && <ArrowPathIcon className='w-5 animate-spin mb-2' />}
 
       <div
-        className={`py-2 px-4 relative rounded-xl max-w-2xl whitespace-pre-wrap my-0 ${bubbleClasses} ${alignmentClass}`}
+        className={`py-2 px-4 relative rounded-xl max-w-2xl whitespace-pre-wrap ${bubbleClasses} ${alignmentClass}`}
       >
         {loading && (
           <Typography variant='caption' element='span'>
@@ -40,9 +39,8 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
         {message && <Typography variant='body1'>{message.trim()}</Typography>}
       </div>
 
-      <Button
-        variant='icon'
-        className={`duration-50 end w-fit opacity-0 group-hover:opacity-100 ${alignmentClass}`}
+      <button
+        className={`duration-50 end w-fit opacity-0 group-hover:opacity-100 mt-3 ${alignmentClass}`}
         onClick={() => copyToClipboard()}
       >
         {!copyLoading ? (
@@ -50,7 +48,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
         ) : (
           <CheckIcon className='w-5' />
         )}
-      </Button>
+      </button>
     </div>
   )
 }

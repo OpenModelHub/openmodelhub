@@ -28,7 +28,7 @@ const ModelsGroup = () => {
 
         if (isInitialLoad) setMessages(initModelMessages)
         setModels(initModelInfo)
-        pushNotification('success', 'Successfully retrieved models.')
+        pushNotification('success', 'Successfully refreshed models.')
       })
       .catch((e) => {
         const err: string = e.toString()

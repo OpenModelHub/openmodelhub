@@ -1,5 +1,8 @@
 import React from 'react'
 import Link from './Link'
+import Tooltip from './Tooltip'
+import Typography from './Typography'
+
 interface ButtonProps {
   children: React.ReactNode
   onClick?: () => void
@@ -10,6 +13,7 @@ interface ButtonProps {
   className?: string
   disabled?: boolean
   external?: boolean
+  tooltip?: React.ReactNode
 }
 
 const baseClasses = 'block cursor-pointer underline-none select-none'
@@ -44,16 +48,22 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   disabled = false,
   external = false,
+  tooltip,
   ...props
 }) => {
   const cls = `${baseClasses} ${
     variantClasses[variant][color == 'light' ? 0 : 1]
-  } ${className}`
+  } group ${className}`
 
   if (type === 'link') {
     return (
       <Link className={cls} href={href} external={external} {...props}>
         {children}
+        {tooltip && (
+          <Tooltip direction='up'>
+            <Typography variant='caption'>{tooltip}</Typography>
+          </Tooltip>
+        )}
       </Link>
     )
   }
@@ -61,6 +71,11 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button disabled={disabled} onClick={onClick} className={cls} {...props}>
       {children}
+      {tooltip && (
+        <Tooltip direction='up'>
+          <Typography variant='caption'>{tooltip}</Typography>
+        </Tooltip>
+      )}
     </button>
   )
 }

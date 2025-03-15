@@ -26,12 +26,12 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-black/20 rounded-full my-2;
+    @apply bg-black/0 rounded-full my-2;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-black/50 rounded-full cursor-pointer;
+    @apply bg-black/0 rounded-full cursor-pointer;
   }
 
   /* Handle on hover */

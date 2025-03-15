@@ -30,21 +30,16 @@ const ChatView: React.FC<ChatViewProps> = ({ model }) => {
           <Typography variant='h4'>
             {model} (Local, {(models[model].size / 1e9).toFixed(1)}GB)
           </Typography>
-
-          <Tooltip
-            direction='down'
-            message={
-              <>
-                {Object.keys(specifications).map((specKey, i) => (
-                  <Typography variant='caption' key={i}>
-                    <b>{specKey}:</b> {specifications[specKey]}
-                  </Typography>
-                ))}
-              </>
-            }
-          >
+          <div className='group'>
             <InformationCircleIcon className='w-5 mt-1' />
-          </Tooltip>
+            <Tooltip direction='down'>
+              {Object.keys(specifications).map((specKey, i) => (
+                <Typography variant='caption' key={i}>
+                  <b>{specKey}:</b> {specifications[specKey]}
+                </Typography>
+              ))}
+            </Tooltip>
+          </div>
         </div>
         <Status status='available' />
       </div>
