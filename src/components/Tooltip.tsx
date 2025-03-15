@@ -14,7 +14,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 }) => {
   const directionClass = {
     up: '-top-12',
-    down: '-bottom-12',
+    down: '-bottom-20',
     left: '-left-12',
     right: '-right-2',
   }

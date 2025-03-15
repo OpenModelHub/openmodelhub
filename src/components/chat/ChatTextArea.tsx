@@ -63,11 +63,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
           role: 'user',
           loading: false,
         },
-        {
-          message: '',
-          role: 'assistant',
-          loading: true,
-        },
       ],
     }
 
@@ -79,6 +74,20 @@ const ChatArea: React.FC<ChatAreaProps> = ({ currentModel }) => {
         content: x.message,
       }))
     )
+
+    const appendedAssistant: Record<string, ChatDisplayMessage[]> = {
+      ...curMessages,
+      [currentModel]: [
+        ...curMessages[currentModel],
+        {
+          message: '',
+          role: 'assistant',
+          loading: true,
+        },
+      ],
+    }
+
+    setMessages(appendedAssistant)
 
     // @ts-expect-error AsyncIterator must be implemented globally here
     for await (const chunk of res) {

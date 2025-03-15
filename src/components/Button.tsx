@@ -9,6 +9,7 @@ interface ButtonProps {
   variant?: 'text' | 'contained' | 'outlined' | 'icon'
   color?: 'light' | 'dark'
   element?: 'button' | 'link'
+  size?: 'normal' | 'small'
   href?: string
   className?: string
   disabled?: boolean
@@ -33,14 +34,20 @@ const variantClasses = {
     'px-4 py-1 rounded-md text-white hover:brightness-105 active:brightness-110',
   ],
   icon: [
-    'p-2 rounded-md text-black hover:bg-primary-200/50 hover:brightness-80 active:brightness-70 grid items-center justify-center',
-    'p-2 rounded-md text-white hover:bg-primary-200/50 hover:brightness-120 active:brightness-130 grid items-center justify-center',
+    'rounded-md text-black hover:bg-primary-50/30 hover:brightness-80 active:brightness-70 grid items-center justify-center',
+    'rounded-md text-white hover:bg-primary-50/30 hover:brightness-120 active:brightness-130 grid items-center justify-center',
   ],
+}
+
+const sizeClasses = {
+  small: 'p-1',
+  normal: 'p-2',
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
+  size = 'normal',
   variant = 'contained',
   color = 'light',
   element: type = 'button',
@@ -53,7 +60,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const cls = `${baseClasses} ${
     variantClasses[variant][color == 'light' ? 0 : 1]
-  } group ${className}`
+  } group ${className} ${sizeClasses[size]}`
 
   if (type === 'link') {
     return (

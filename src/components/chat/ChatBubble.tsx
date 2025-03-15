@@ -1,7 +1,15 @@
 import React from 'react'
-import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import Typography from '../Typography'
-import { CheckIcon, Square2StackIcon } from '@heroicons/react/24/outline'
+import {
+  CheckIcon,
+  Square2StackIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline'
+import Button from '../Button'
+import { GlobalContext } from '../../pages/preview'
+import { streamGenerateChat } from '../../lib/ollamaChat'
+import { ChatDisplayMessage } from './ChatDisplayArea'
+import { NotificationContext } from '../Notification'
 
 interface ChatBubbleProps {
   message: string
@@ -11,17 +19,80 @@ interface ChatBubbleProps {
 
 const COPY_TIMEOUT = 750
 const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
+  const { messages, setMessages, page } = React.useContext(GlobalContext)
+  const { pushNotification } = React.useContext(NotificationContext)
+  const currentModel = page.slice(5)
   const [copyLoading, setCopyLoading] = React.useState(false)
   const bubbleClasses =
-    role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'
+    role === 'user' ? 'bg-blue-500 text-white mb-4' : 'bg-gray-300 text-black'
 
   const alignmentClass = role === 'user' ? 'self-end' : 'self-start'
 
   const copyToClipboard = () => {
+    if (copyLoading) return
     navigator.clipboard.writeText(message)
     setCopyLoading(true)
+    pushNotification('info', 'Text copied to clipboard.')
 
     setTimeout(() => setCopyLoading(false), COPY_TIMEOUT)
+  }
+
+  const appendLastMessage = (res: ChatCompletionResponse) => {
+    setMessages((prev) => {
+      const len = prev[currentModel].length
+      const appended = prev[currentModel][len - 1].message + res.message.content
+      return {
+        ...prev,
+        [currentModel]: [
+          ...prev[currentModel].slice(0, len - 1),
+          {
+            message: appended,
+            role: res.message.role,
+            loading: !res.done,
+          },
+        ],
+      }
+    })
+  }
+
+  const resubmitMessage = async () => {
+    const curMessages: Record<string, ChatDisplayMessage[]> = {
+      ...messages,
+      [currentModel]: [
+        ...messages[currentModel].slice(0, messages[currentModel].length - 1),
+      ],
+    }
+
+    setMessages(curMessages)
+
+    const res = await streamGenerateChat(
+      currentModel,
+      curMessages[currentModel].map((x) => ({
+        role: x.role,
+        content: x.message,
+      }))
+    )
+
+    const appendedAssistant: Record<string, ChatDisplayMessage[]> = {
+      ...curMessages,
+      [currentModel]: [
+        ...curMessages[currentModel],
+        {
+          message: '',
+          role: 'assistant',
+          loading: true,
+        },
+      ],
+    }
+
+    setMessages(appendedAssistant)
+
+    // @ts-expect-error AsyncIterator must be implemented globally here
+    for await (const chunk of res) {
+      const tx = new TextDecoder().decode(chunk)
+      const x = JSON.parse(tx)
+      appendLastMessage(x)
+    }
   }
 
   return (
@@ -39,16 +110,20 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
         {message && <Typography variant='body1'>{message.trim()}</Typography>}
       </div>
 
-      <button
-        className={`duration-50 end w-fit opacity-0 group-hover:opacity-100 mt-3 ${alignmentClass}`}
-        onClick={() => copyToClipboard()}
-      >
-        {!copyLoading ? (
-          <Square2StackIcon className='w-5' />
-        ) : (
-          <CheckIcon className='w-5' />
-        )}
-      </button>
+      {role !== 'user' && !loading && (
+        <div className='duration-50 opacity-0 group-hover:opacity-100 flex mt-2'>
+          <Button variant='icon' size='small' onClick={() => copyToClipboard()}>
+            {!copyLoading ? (
+              <Square2StackIcon className='w-5' />
+            ) : (
+              <CheckIcon className='w-5' />
+            )}
+          </Button>
+          <Button variant='icon' size='small' onClick={() => resubmitMessage()}>
+            <ArrowPathIcon className='w-5' />
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

@@ -39,7 +39,7 @@ export const Notification: React.FC<Notification> = ({ type, message, id }) => {
     'pl-6 pr-4 py-3 flex whitespace-pre-wrap rounded-xl lg:w-md sm:w-xs w-60 relative shadow-lg border text-black font-semibold block text-left'
 
   const variantClasses = {
-    info: 'bg-primary-100 border-primary-900',
+    info: 'bg-cyan-100 border-cyan-900',
     success: 'bg-green-100 border-green-900',
     warning: 'bg-yellow-100 border-yellow-900',
     error: 'bg-red-100 border-red-900',
