@@ -1,10 +1,10 @@
 import React from 'react'
 import { GlobalContext, ValidPage } from '../pages/preview'
-import ChatView from './views/ChatView'
-import ManageModelsView from './views/ManageModelsView'
-import PullModelsView from './views/PullModelsView'
-import SettingsView from './views/SettingsView'
-import DownloadsView from './views/DownloadsView'
+import ChatView from './Chat/ChatView'
+import ManageModelsView from './MangeModels/ManageModelsView'
+import PullModelsView from './PullModels/PullModelsView'
+import SettingsView from './Settings/SettingsView'
+import DownloadsView from './Downloads/DownloadsView'
 
 const MainView: React.FC = () => {
   const { sidebarOpen, page } = React.useContext(GlobalContext)

@@ -1,12 +1,12 @@
 import React from 'react'
-import CollapsibleSidebar from '../../components/sidebar/CollapsibleSidebar'
+import CollapsibleSidebar from '../../components/Sidebar/CollapsibleSidebar'
 import MainView from '../../components/MainView'
-import { ChatDisplayMessage } from '../../components/chat/ChatDisplayArea'
 import {
   NotificationContext,
   NotificationGroup,
   useNotification,
 } from '../../components/Notification'
+import { ChatDisplayMessage } from '../../components/Chat/ChatTypes'
 
 export type ValidPage =
   | 'tab:manageModels'

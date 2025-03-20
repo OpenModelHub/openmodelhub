@@ -1,12 +1,7 @@
 import React from 'react'
 import ChatBubble from './ChatBubble'
 import Typography from '../Typography'
-
-export interface ChatDisplayMessage {
-  message: string
-  role: ChatRole
-  loading: boolean
-}
+import { ChatDisplayMessage } from './ChatTypes'
 
 interface ChatDisplayProps {
   messages: ChatDisplayMessage[]

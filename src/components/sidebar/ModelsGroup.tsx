@@ -6,7 +6,7 @@ import { ArrowPathIcon, FolderOpenIcon } from '@heroicons/react/24/outline'
 import ModelButton from './ModelButton'
 import { fetchModels } from '../../lib/ollamaChat'
 import { NotificationContext } from '../Notification'
-import { ChatDisplayMessage } from '../chat/ChatDisplayArea'
+import { ChatDisplayMessage } from '../Chat/ChatTypes'
 
 const ModelsGroup = () => {
   const { models, setModels, setMessages } = React.useContext(GlobalContext)

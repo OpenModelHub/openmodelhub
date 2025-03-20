@@ -8,7 +8,7 @@ import {
 import Button from '../Button'
 import { GlobalContext } from '../../pages/preview'
 import { streamGenerateChat } from '../../lib/ollamaChat'
-import { ChatDisplayMessage } from './ChatDisplayArea'
+import { ChatDisplayMessage } from './ChatTypes'
 
 interface ChatBubbleProps {
   message: string

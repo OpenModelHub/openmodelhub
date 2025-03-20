@@ -6,7 +6,7 @@ import React from 'react'
 import { streamGenerateChat } from '../../lib/ollamaChat'
 import { GlobalContext } from '../../pages/preview'
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
-import { ChatDisplayMessage } from './ChatDisplayArea'
+import { ChatDisplayMessage } from './ChatTypes'
 
 interface ChatAreaProps {
   currentModel: string
