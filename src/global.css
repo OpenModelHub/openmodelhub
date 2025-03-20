@@ -21,7 +21,7 @@
 
   /* width */
   ::-webkit-scrollbar {
-    @apply w-1 h-1;
+    @apply w-1;
   }
 
   /* Track */
@@ -31,7 +31,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-black/0 rounded-full cursor-pointer;
+    @apply bg-black/50 rounded-full cursor-pointer;
   }
 
   /* Handle on hover */

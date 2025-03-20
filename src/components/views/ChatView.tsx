@@ -1,7 +1,7 @@
 import React from 'react'
 import ChatDisplayArea from '../chat/ChatDisplayArea'
 import ChatArea from '../chat/ChatTextArea'
-import Status from '../chat/Status'
+import Status from '../Status'
 import Typography from '../Typography'
 import { GlobalContext } from '../../pages/preview'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
@@ -41,7 +41,7 @@ const ChatView: React.FC<ChatViewProps> = ({ model }) => {
             </Tooltip>
           </div>
         </div>
-        <Status status='available' />
+        <Status status='available' message='Available' />
       </div>
       {/* texts */}
       <ChatDisplayArea messages={messages[model]} />

@@ -4,6 +4,7 @@ import ChatView from './views/ChatView'
 import ManageModelsView from './views/ManageModelsView'
 import PullModelsView from './views/PullModelsView'
 import SettingsView from './views/SettingsView'
+import DownloadsView from './views/DownloadsView'
 
 const MainView: React.FC = () => {
   const { sidebarOpen, page } = React.useContext(GlobalContext)
@@ -11,6 +12,7 @@ const MainView: React.FC = () => {
   const PageComponent: Record<ValidPage, React.FC> = {
     'tab:manageModels': ManageModelsView,
     'tab:pullModels': PullModelsView,
+    'tab:downloads': DownloadsView,
     'tab:settings': SettingsView,
   }
 

@@ -11,8 +11,8 @@ import {
 export type ValidPage =
   | 'tab:manageModels'
   | 'tab:pullModels'
+  | 'tab:downloads'
   | 'tab:settings'
-  | 'chat:llama3.2:latest'
   | `chat:${string}`
 
 interface GlobalContextState {

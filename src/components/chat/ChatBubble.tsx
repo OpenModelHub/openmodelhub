@@ -9,7 +9,6 @@ import Button from '../Button'
 import { GlobalContext } from '../../pages/preview'
 import { streamGenerateChat } from '../../lib/ollamaChat'
 import { ChatDisplayMessage } from './ChatDisplayArea'
-import { NotificationContext } from '../Notification'
 
 interface ChatBubbleProps {
   message: string
@@ -20,19 +19,18 @@ interface ChatBubbleProps {
 const COPY_TIMEOUT = 750
 const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
   const { messages, setMessages, page } = React.useContext(GlobalContext)
-  const { pushNotification } = React.useContext(NotificationContext)
   const currentModel = page.slice(5)
   const [copyLoading, setCopyLoading] = React.useState(false)
   const bubbleClasses =
-    role === 'user' ? 'bg-blue-500 text-white mb-4' : 'bg-gray-300 text-black'
+    role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'
 
-  const alignmentClass = role === 'user' ? 'self-end' : 'self-start'
+  const alignmentClass = role === 'user' ? 'self-end mb-4' : 'self-start'
 
   const copyToClipboard = () => {
     if (copyLoading) return
     navigator.clipboard.writeText(message)
     setCopyLoading(true)
-    pushNotification('info', 'Text copied to clipboard.')
+    // pushNotification('info', 'Text copied to clipboard.')
 
     setTimeout(() => setCopyLoading(false), COPY_TIMEOUT)
   }
@@ -99,15 +97,34 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, role, loading }) => {
     <div className='flex flex-col group mb-1'>
       {loading && <ArrowPathIcon className='w-5 animate-spin mb-2' />}
 
-      <div
-        className={`py-2 px-4 relative rounded-xl max-w-2xl whitespace-pre-wrap ${bubbleClasses} ${alignmentClass}`}
-      >
-        {loading && (
-          <Typography variant='caption' element='span'>
-            Thinking...
-          </Typography>
+      <div className={`relative max-w-2xl flex flex-row ${alignmentClass}`}>
+        {role === 'user' && (
+          <div className='duration-50 items-center justify-center opacity-0 group-hover:opacity-100 flex mr-2'>
+            <div>
+              <Button
+                variant='icon'
+                size='small'
+                onClick={() => copyToClipboard()}
+              >
+                {!copyLoading ? (
+                  <Square2StackIcon className='w-6' />
+                ) : (
+                  <CheckIcon className='w-6' />
+                )}
+              </Button>
+            </div>
+          </div>
         )}
-        {message && <Typography variant='body1'>{message.trim()}</Typography>}
+        <div
+          className={`py-2 px-4 rounded-xl whitespace-pre-wrap ${bubbleClasses}`}
+        >
+          {loading && (
+            <Typography variant='caption' element='span'>
+              Thinking...
+            </Typography>
+          )}
+          {message && <Typography variant='body1'>{message.trim()}</Typography>}
+        </div>
       </div>
 
       {role !== 'user' && !loading && (

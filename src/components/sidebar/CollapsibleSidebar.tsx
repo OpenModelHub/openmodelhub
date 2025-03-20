@@ -1,5 +1,6 @@
 import Button from '../Button'
 import {
+  ArrowDownTrayIcon,
   CloudArrowDownIcon,
   Cog6ToothIcon,
   SparklesIcon,
@@ -31,6 +32,12 @@ const SidebarButtonGroup = () => {
         icon={CloudArrowDownIcon}
         targetPage='tab:pullModels'
         label='Pull Models'
+      />
+
+      <SidebarButton
+        icon={ArrowDownTrayIcon}
+        targetPage='tab:downloads'
+        label='Downloads'
       />
 
       <SidebarButton
