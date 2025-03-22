@@ -1,7 +1,7 @@
 import React from 'react'
-import Typography from '../Typography'
+import Typography from '../components/Typography'
 
-const DownloadsView: React.FC = () => {
+const DownloadsPage: React.FC = () => {
   return (
     <div className='p-4'>
       <Typography variant='h4'>Downloads</Typography>
@@ -9,4 +9,4 @@ const DownloadsView: React.FC = () => {
   )
 }
 
-export default DownloadsView
+export default DownloadsPage

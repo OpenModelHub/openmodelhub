@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../Button'
 import Typography from '../Typography'
-import { GlobalContext, ValidPage } from '../../pages/preview'
+import { GlobalContext, ValidPage } from '../../pages'
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 

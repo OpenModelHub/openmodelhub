@@ -4,7 +4,7 @@ import Button from '../Button'
 import Typography from '../Typography'
 import React from 'react'
 import { streamGenerateChat } from '../../lib/ollamaChat'
-import { GlobalContext } from '../../pages/preview'
+import { GlobalContext } from '../../pages'
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 import { ChatDisplayMessage } from './ChatTypes'
 

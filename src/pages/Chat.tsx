@@ -1,17 +1,17 @@
 import React from 'react'
-import ChatDisplayArea from './ChatDisplayArea'
-import ChatArea from './ChatTextArea'
-import Status from '../Status'
-import Typography from '../Typography'
-import { GlobalContext } from '../../pages/preview'
+import ChatDisplayArea from '../components/Chat/ChatDisplayArea'
+import ChatArea from '../components/Chat/ChatTextArea'
+import Status from '../components/Status'
+import Typography from '../components/Typography'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
-import Tooltip from '../Tooltip'
+import Tooltip from '../components/Tooltip'
+import { GlobalContext } from '.'
 
 interface ChatViewProps {
   model: string
 }
 
-const ChatView: React.FC<ChatViewProps> = ({ model }) => {
+const ChatPage: React.FC<ChatViewProps> = ({ model }) => {
   const { messages, models } = React.useContext(GlobalContext)
 
   const specifications: Record<string, string> = {
@@ -53,4 +53,4 @@ const ChatView: React.FC<ChatViewProps> = ({ model }) => {
   )
 }
 
-export default ChatView
+export default ChatPage

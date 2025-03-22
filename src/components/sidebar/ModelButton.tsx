@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button'
 import Typography from '../Typography'
 import { cutStrLen } from '../../lib/util'
-import { GlobalContext } from '../../pages/preview'
+import { GlobalContext } from '../../pages'
 
 interface ModelButtonProps {
   model: string

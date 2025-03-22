@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline'
 import SidebarButton from './SidebarButton'
 import { Squares2X2Icon } from '@heroicons/react/24/outline'
-import { GlobalContext } from '../../pages/preview'
+import { GlobalContext } from '../../pages'
 import React from 'react'
 import ModelsGroup from './ModelsGroup'
 const SidebarButtonGroup = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import Typography from '../Typography'
+import Typography from '../components/Typography'
 
-const PullModelsView: React.FC = () => {
+const PullModelsPage: React.FC = () => {
   return (
     <div className='p-4'>
       <Typography variant='h4'>Pull Models</Typography>
@@ -9,4 +9,4 @@ const PullModelsView: React.FC = () => {
   )
 }
 
-export default PullModelsView
+export default PullModelsPage

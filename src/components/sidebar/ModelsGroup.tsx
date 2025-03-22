@@ -1,5 +1,5 @@
 import React from 'react'
-import { GlobalContext } from '../../pages/preview'
+import { GlobalContext } from '../../pages'
 import Typography from '../Typography'
 import Button from '../Button'
 import { ArrowPathIcon, FolderOpenIcon } from '@heroicons/react/24/outline'

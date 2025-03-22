@@ -6,7 +6,7 @@ import {
   ArrowPathIcon,
 } from '@heroicons/react/24/outline'
 import Button from '../Button'
-import { GlobalContext } from '../../pages/preview'
+import { GlobalContext } from '../../pages'
 import { streamGenerateChat } from '../../lib/ollamaChat'
 import { ChatDisplayMessage } from './ChatTypes'
 

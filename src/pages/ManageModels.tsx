@@ -1,10 +1,10 @@
 import React from 'react'
-import Typography from '../Typography'
-import Button from '../Button'
+import Typography from '../components/Typography'
+import Button from '../components/Button'
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'
-import Status from '../Status'
+import Status from '../components/Status'
 
-const ManageModelsView: React.FC = () => {
+const ManageModelsPage: React.FC = () => {
   return (
     <div className='p-4 max-w-3xl'>
       <Typography variant='h4' className='mb-8'>
@@ -32,4 +32,4 @@ const ManageModelsView: React.FC = () => {
   )
 }
 
-export default ManageModelsView
+export default ManageModelsPage

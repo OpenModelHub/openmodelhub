@@ -1,7 +1,7 @@
 import React from 'react'
-import Typography from '../Typography'
+import Typography from '../components/Typography'
 
-const SettingsView: React.FC = () => {
+const SettingsPage: React.FC = () => {
   return (
     <div className='p-4'>
       <Typography variant='h4'>Settings</Typography>
@@ -9,4 +9,4 @@ const SettingsView: React.FC = () => {
   )
 }
 
-export default SettingsView
+export default SettingsPage
