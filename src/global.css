@@ -15,28 +15,12 @@
 }
 
 @layer base {
+  :root {
+    @apply bg-primary-100;
+  }
+
   b {
     @apply font-semibold;
-  }
-
-  /* width */
-  ::-webkit-scrollbar {
-    @apply w-1;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    @apply bg-black/0 rounded-full my-2;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    @apply bg-black/50 rounded-full cursor-pointer;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-black/80;
   }
 }
 

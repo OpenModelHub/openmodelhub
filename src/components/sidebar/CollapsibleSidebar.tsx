@@ -57,7 +57,7 @@ const CollapsibleSidebar: React.FC = () => {
   }
 
   return (
-    <div className='sticky left-0'>
+    <aside className='h-screen sticky left-0'>
       {!sidebarOpen && (
         <Button
           variant='icon'
@@ -102,7 +102,7 @@ const CollapsibleSidebar: React.FC = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </aside>
   )
 }
 

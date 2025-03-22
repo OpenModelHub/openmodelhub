@@ -22,7 +22,7 @@ const EmptyChat = () => {
 
 const ChatDisplayArea: React.FC<ChatDisplayProps> = ({ messages }) => {
   return (
-    <div className='grow overflow-y-auto max-h-screen pb-10'>
+    <div>
       {messages.length > 0 ? (
         messages.map((msg, index) => (
           <ChatBubble

@@ -60,7 +60,7 @@ export default function Home() {
     >
       <NotificationContext.Provider value={notificationValue}>
         <NotificationGroup />
-        <div className='flex bg-primary-100'>
+        <div className='flex'>
           <CollapsibleSidebar />
           <MainView />
         </div>
