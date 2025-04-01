@@ -21,10 +21,10 @@ const Router: React.FC = () => {
   return (
     <div
       className={`flex-grow overflow-y-auto max-h-screen duration-300 ${
-        !sidebarOpen && 'mx-5 sm:mx-10 md:mx-20 lg:mx-40'
+        !sidebarOpen && 'px-5 sm:px-10 md:px-20 lg:px-40'
       }`}
     >
-      <div className='lg:mx-12 sm:mx-10 h-full flex flex-col'>
+      <div className='lg:px-12 sm:px-10 h-full flex flex-col'>
         {page.startsWith('chat:') ? (
           <ChatPage model={page.slice(5)} />
         ) : (
